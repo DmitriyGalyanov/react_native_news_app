@@ -1,43 +1,77 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {View, FlatList, Text} from 'react-native';
 
 import NewsPiece from 'components/NewsPiece';
 
 export default function NewsList(props) {
-	// console.log(props);
 
-	// const listData = props;
+	// there is an opinion that I will have to store those in Redux (to allow Redux-Persist save them)
+	// and search input field will be a different component (mb placed inside of the topbar)
+	const [searchQuery, setSearchQuery] = useState('react');
 
-	const listData = [
-		{
-			author: 'author',
-			content: 'content',
-			description: 'description',
-			publishedAt: 'publishedAt',
-			publisher: 'publisher',
-			title: 'title',
-			url: 'url',
-			urlToImage: 'https://reactnative.dev/img/tiny_logo.png',
-		}
-	]
+	const limit = 20;
 
-	const renderItem = (item) => {
+	const apiUrl = 'https://newsapi.org/v2/everything?' +
+		`q=${searchQuery}` +
+		'&apiKey=3f1d580b86b6414e8be8098c17351375' +
+		// '&sortBy=relevancy' +
+		`&pageSize=${limit}`;
 
-		return (
-			<>
-			<Text>TEST</Text>
-				<NewsPiece {...item} />
-			</>
-		)
+	useEffect(() => {
+		onRefresh();
+	}, []);
+
+
+	const [list, setList] = useState([]);
+	const isListLoading = false;
+	const [isError, setIsError] = useState(false);
+
+	const getMoreData = (isRefreshing = false) => {
+		const offset = isRefreshing ? 0 : list.length;
+		const page = Math.ceil(offset / limit) + 1;
+
+		fetch(`${apiUrl}&page=${page}`)
+			.then(response => response.json())
+			.then(json => {
+				setList(isRefreshing
+					? json.articles
+					: list.concat(json.articles))
+			})
+			.catch(error => setIsError(true)) //handle it somehow later
+	};
+
+	const onRefresh = () => {
+		getMoreData(true);
+	};
+
+	const onScrollToEnd = () => {
+		getMoreData(false);
 	}
 
+	const renderItem = (item) => {
+		return (
+			<NewsPiece {...item} />
+		)
+	};
+
+	if (isError) {
+		return (
+			//here should be placed an error placeholder component
+			<Text>Something went wrong... refresh please</Text>
+			//add a refresh button (if is error; there is an opinion that such error status can be stored in Redux too)
+		)
+	};
 	return (
 		<View>
 			<FlatList
-				data={listData}
+				data={list}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.urlToImage} /* temporary... */
+				keyExtractor={(item) => item.url} /* temporary...? */
+				refreshing={isListLoading}
+				onRefresh={onRefresh}
+				onEndReached={onScrollToEnd}
+				onEndReachedThreshold={0.05}
 			/>
 		</View>
 	)

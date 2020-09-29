@@ -10,6 +10,8 @@ const {width: windowWidth} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 	container: {
+		
+		width: windowWidth * 0.85,
 		alignSelf: 'center',
 
 		backgroundColor: '#fff', //opacity needed
@@ -43,15 +45,14 @@ const styles = StyleSheet.create({
 });
 
 export default function NewsPiece(props) {
-	// const itemData = props.item;
-	// console.log(itemData);
 	const {
 		urlToImage,
 		author,
 		title,
 		content,
-		publisher,
 		publishedAt} = props.item;
+	const {publisher} = props.item.source;
+
 	return (
 		<View style={styles.container}>
 			<Image
