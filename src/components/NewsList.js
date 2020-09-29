@@ -18,7 +18,7 @@ export default function NewsList(props) {
 			publisher: 'publisher',
 			title: 'title',
 			url: 'url',
-			urlToImage: 'urlToImage',
+			urlToImage: 'https://reactnative.dev/img/tiny_logo.png',
 		}
 	]
 
