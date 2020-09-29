@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 		
 		width: windowWidth * 0.85,
 		alignSelf: 'center',
+		marginTop: 12,
 
 		backgroundColor: '#fff', //opacity needed
 		borderWidth: 1,
@@ -21,8 +22,11 @@ const styles = StyleSheet.create({
 	},
 
 	image: {
-		width: windowWidth * 0.85,
+		width: windowWidth * 0.85 - 2,
 		height: 200,
+		borderRadius: 10,
+		borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 0
 	},
 	
 	author: {
@@ -53,6 +57,17 @@ export default function NewsPiece(props) {
 		publishedAt} = props.item;
 	const {publisher} = props.item.source;
 
+	const publishedAtObj = new Date(publishedAt);
+
+	const publishedAtReadable = `${publishedAtObj.toDateString()}, ` +
+		(publishedAtObj.getHours() > 9
+			? publishedAtObj.getHours()
+			: '0' + publishedAtObj.getHours()) +
+		':' +
+		(publishedAtObj.getMinutes() > 9
+			? publishedAtObj.getMinutes()
+			: '0' + publishedAtObj.getMinutes());
+
 	return (
 		<View style={styles.container}>
 			<Image
@@ -79,7 +94,7 @@ export default function NewsPiece(props) {
 						{publisher}
 					</Text>
 					<Text style={styles.publishedAt}>
-						{publishedAt}
+						{publishedAtReadable}
 					</Text>
 				</View>
 				{/* <View>
