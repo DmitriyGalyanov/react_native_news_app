@@ -4,7 +4,7 @@ import {View, FlatList, Text} from 'react-native';
 
 import NewsPiece from 'components/NewsPiece';
 
-export default function NewsList(props) {
+export default function NewsList() {
 
 	// there is an opinion that I will have to store those in Redux (to allow Redux-Persist save them)
 	// and search input field will be a different component (mb placed inside of the topbar)
