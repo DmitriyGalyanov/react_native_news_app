@@ -21,12 +21,14 @@ import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
 
+import NewsListPage from './src/pages/NewsListPage';
+
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        
+      <NewsListPage />
       </SafeAreaView>
     </>
   );

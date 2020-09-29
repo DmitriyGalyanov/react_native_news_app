@@ -19,7 +19,7 @@ export default function NewsListPage() {
 	return (
 		<View>
 			<Text>News List Page</Text>
-			{/* <NewsList /> */}
+			<NewsList />
 		</View>
 	)
 }
