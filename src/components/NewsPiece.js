@@ -7,7 +7,7 @@ export default function NewsPiece(props) {
 	return (
 		<View>
 			<Text>News Piece Header</Text>
-			<Text>News Piece Cont</Text>
+			<Text>News Piece Content</Text>
 		</View>
 	)
 }

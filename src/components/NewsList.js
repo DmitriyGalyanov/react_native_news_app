@@ -1,11 +1,8 @@
 import React from 'react';
 
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 
-// import NewsPiece from '../NewsPiece';
-// import NewsPiece from 'components/NewsPiece';
-// import NewsPiece from '../NewsPiece';
-import NewsPiece from '../components/NewsPiece';
+import NewsPiece from 'components/NewsPiece';
 
 export default function NewsList(props) {
 	// console.log(props);
@@ -29,11 +26,11 @@ export default function NewsList(props) {
 
 		return (
 			<>
+			<Text>TEST</Text>
 				<NewsPiece {...item} />
 			</>
 		)
 	}
-
 
 	return (
 		<View>

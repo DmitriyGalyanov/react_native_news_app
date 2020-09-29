@@ -2,10 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import {View, Text} from 'react-native';
 
-// import NewsList from '../../components/NewsList';
-// import NewsList from 'components/NewsList';
-// import NewsList from '../components/NewsList';
-import NewsList from '../components/NewsList';
+import NewsList from 'components/NewsList';
 
 export default function NewsListPage() {
 	const [list, setList] = useState([]);
