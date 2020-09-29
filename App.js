@@ -21,7 +21,8 @@ import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
 
-import NewsListPage from './src/pages/NewsListPage';
+// import NewsListPage from './src/pages/NewsListPage';
+import NewsListPage from 'pages/NewsListPage';
 
 const App: () => React$Node = () => {
   return (
