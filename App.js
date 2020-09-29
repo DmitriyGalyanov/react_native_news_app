@@ -6,6 +6,7 @@
  * @flow strict-local
  */
 
+import 'react-native-gesture-handler'; // to index.js?
 import React from 'react';
 import {
 	SafeAreaView,
@@ -16,22 +17,29 @@ import {
 	StatusBar,
 } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import {
 	Header,
 	Colors
 } from 'react-native/Libraries/NewAppScreen';
 
-// import NewsListPage from './src/pages/NewsListPage';
-import NewsListPage from 'pages/NewsListPage';
+import AllNewsListScreen from 'screens/AllNewsListScreen';
+
+const Stack = createStackNavigator();
 
 const App: () => React$Node = () => {
 	return (
-		<>
-		<SafeAreaView>
-			<StatusBar barStyle="dark-content" />
-			<NewsListPage />
-		</SafeAreaView>
-		</>
+		<NavigationContainer>
+			{/* <SafeAreaView> */}
+				{/* <StatusBar barStyle="dark-content" /> */}
+				{/* <AllNewsListScreen /> */}
+				<Stack.Navigator>
+					<Stack.Screen name="AllNewsList" component={AllNewsListScreen} />
+				</Stack.Navigator>
+			{/* </SafeAreaView> */}
+		</NavigationContainer>
 	);
 };
 
