@@ -70,13 +70,17 @@ export default function BookmarksList() {
 			//add a refresh button (if is error; there is an opinion that such error status can be stored in Redux too)
 		)
 	};
+	if (list.length === 0) {
+		return (
+			<Text>No bookmarks yet!</Text>
+		)
+	}
 	return (
 		<View>
-			<Text> {bookmarksData.entries[0].author}</Text>
 			<FlatList
 				data={list}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.url} /* temporary...? */
+				keyExtractor={(item) => item.url}
 				refreshing={isListLoading}
 				// onRefresh={onRefresh}
 				// onEndReached={onScrollToEnd}

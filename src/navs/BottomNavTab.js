@@ -7,15 +7,17 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MainScreen from 'screens/MainScreen';
 import BookmarksListScreen from 'screens/BookmarksListScreen';
 
+import themeColors from 'theme/colors';
+
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomNavTab() {
 	return (
 		<Tab.Navigator initialRouteName="MainScreen"
-			activeColor="orange"
+			activeColor={themeColors.accent}
 			inactiveColor="gray"
-			barStyle={{ backgroundColor: 'pink' }}
+			barStyle={{ backgroundColor: themeColors.main }}
 		>
 			<Tab.Screen name="MainScreen" component={MainScreen}
 				options={{

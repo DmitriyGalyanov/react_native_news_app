@@ -4,7 +4,17 @@ import {StyleSheet,
 	View,
 	Text,
 	Image,
-	Dimensions,} from 'react-native';
+	Dimensions,
+	TouchableHighlight} from 'react-native';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {useSelector, useDispatch} from 'react-redux';
+import {selectBookmarksData,
+	addBookmark, removeBookmark} from 'state_slices/bookmarksSlice';
+
+import themeColors from 'theme/colors';
+
 
 const {width: windowWidth} = Dimensions.get('window');
 
@@ -28,6 +38,10 @@ const styles = StyleSheet.create({
 		borderBottomLeftRadius: 0,
 		borderBottomRightRadius: 0
 	},
+
+	innerContainer: {
+		padding: 12
+	},
 	
 	author: {
 		fontSize: 17
@@ -48,14 +62,29 @@ const styles = StyleSheet.create({
 
 });
 
+
 export default function NewsPiece(props) {
+	const dispatch = useDispatch();
+
 	const {
+		url,
 		urlToImage,
 		author,
 		title,
 		content,
 		publishedAt} = props.item;
 	const {publisher} = props.item.source;
+
+	const {item} = props;
+
+	const bookmarksData = useSelector(selectBookmarksData);
+	const {entries: bookmarksList} = bookmarksData;
+
+	const isBookmarked =
+		bookmarksList.find(bookmark =>
+			bookmark?.url === url
+		) ? true
+			: false
 
 	const publishedAtObj = new Date(publishedAt);
 
@@ -77,28 +106,45 @@ export default function NewsPiece(props) {
 					uri: urlToImage,
 				}}
 			/>
-			<View>
-				<Text style={styles.author}>
-					{author}
-				</Text>
-			</View>
-			<Text style={styles.title}>
-				{title}
-			</Text>
-			<Text style={styles.content}>
-				{content}
-			</Text>
-			<View>
+			<View style={styles.innerContainer}>
 				<View>
-					<Text style={styles.publisher}>
-						{publisher}
+					<Text style={styles.author}>
+						{author}
 					</Text>
-					<Text style={styles.publishedAt}>
-						{publishedAtReadable}
-					</Text>
+					{isBookmarked && ( 
+						<TouchableHighlight onPress={() => dispatch(removeBookmark(item.url))}>
+							<MaterialCommunityIcons name="bookmark"
+								size={26} color={themeColors.accent}
+								// onPress={() => alert('Pressed!')}
+							/>
+						</TouchableHighlight>
+					)}
+					{!isBookmarked && (
+						<TouchableHighlight onPress={() => dispatch(addBookmark({...item}))}>
+							<MaterialCommunityIcons name="bookmark-outline"
+								size={26} color={'gray'}
+							/>
+						</TouchableHighlight>
+					)}
 				</View>
-				{/* <View>
-				</View> */}
+				<Text style={styles.title}>
+					{title}
+				</Text>
+				<Text style={styles.content}>
+					{content}
+				</Text>
+				<View>
+					<View>
+						<Text style={styles.publisher}>
+							{publisher}
+						</Text>
+						<Text style={styles.publishedAt}>
+							{publishedAtReadable}
+						</Text>
+					</View>
+					{/* <View>
+					</View> */}
+				</View>
 			</View>
 		</View>
 	);
