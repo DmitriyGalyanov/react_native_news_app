@@ -1,9 +1,9 @@
-// import {configureStore} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 
-// import bookmarksReducer from './stateSlices/bookmarksSlice';
+import bookmarksReducer from './stateSlices/bookmarksSlice';
 
-// export default configureStore({
-// 	reducer: {
-// 		bookmarksSlice: bookmarksReducer,
-// 	},
-// });
+export default configureStore({
+	reducer: {
+		bookmarksSlice: bookmarksReducer,
+	},
+});
