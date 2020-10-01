@@ -6,6 +6,8 @@ import NewsList from 'components/NewsList';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
+import themeColors from 'theme/colors';
+
 
 function HomeMainScreen() {
 	return (
@@ -21,10 +23,16 @@ const Stack = createStackNavigator();
 export default function HomeScreen() { // MainScreen
 
 	return (
-		<Stack.Navigator initialRouteName="HomeMainScreen">
+		<Stack.Navigator initialRouteName="HomeMainScreen"
+			
+		>
 			<Stack.Screen name="HomeMainScreen" component={HomeMainScreen}
 				options={{
-					title: 'Home'
+					title: 'Home',
+					headerStyle: {
+						backgroundColor: themeColors.main
+					},
+					headerTintColor: themeColors.accent
 				}}
 			/>
 		</Stack.Navigator>

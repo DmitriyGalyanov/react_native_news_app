@@ -6,6 +6,8 @@ import BookmarksList from 'components/BookmarksList';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
+import themeColors from 'theme/colors';
+
 
 function BookmarksMainScreen() {
 	return (
@@ -24,7 +26,11 @@ export default function BookmarksScreen() {
 		<Stack.Navigator initialRouteName="BookmarksMainScreen">
 			<Stack.Screen name="BookmarksMainScreen" component={BookmarksMainScreen}
 				options={{
-					title: 'Bookmarks'
+					title: 'Bookmarks',
+					headerStyle: {
+						backgroundColor: themeColors.main
+					},
+					headerTintColor: themeColors.accent
 				}}
 			/>
 		</Stack.Navigator>
