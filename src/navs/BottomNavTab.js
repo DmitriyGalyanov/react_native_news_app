@@ -4,8 +4,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import MainScreen from 'screens/MainScreen';
-import BookmarksListScreen from 'screens/BookmarksListScreen';
+import HomeScreen from 'screens/HomeScreen';
+import BookmarksScreen from 'screens/BookmarksScreen';
 
 import themeColors from 'theme/colors';
 
@@ -14,12 +14,12 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomNavTab() {
 	return (
-		<Tab.Navigator initialRouteName="MainScreen"
+		<Tab.Navigator initialRouteName="HomeScreen"
 			activeColor={themeColors.accent}
 			inactiveColor="gray"
 			barStyle={{ backgroundColor: themeColors.main }}
 		>
-			<Tab.Screen name="MainScreen" component={MainScreen}
+			<Tab.Screen name="HomeScreen" component={HomeScreen}
 				options={{
 					title: 'Home',
 					tabBarIcon: ({ color }) => (
@@ -27,7 +27,7 @@ export default function BottomNavTab() {
 					)
 				}}
 			/>
-			<Tab.Screen name="BookmarksList" component={BookmarksListScreen}
+			<Tab.Screen name="BookmarksList" component={BookmarksScreen}
 				options={{
 					title: 'Bookmarks',
 					

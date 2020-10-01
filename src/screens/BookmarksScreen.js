@@ -6,23 +6,20 @@ import BookmarksList from 'components/BookmarksList';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-// import BookmarksListScreen from 'screens/BookmarksListScreen';
 
-
-const Stack = createStackNavigator();
-
-function BookmarksMainScreen() { // BookmarksMainScreen
+function BookmarksMainScreen() {
 	return (
 		<View>
-			<Text>BookmarksListScreen</Text>
+			<Text>BookmarksMainScreen</Text>
 			<BookmarksList />
 		</View>
 	)
 }
 
 
-export default function BookmarksListScreen() {
+const Stack = createStackNavigator();
 
+export default function BookmarksScreen() {
 	return (
 		<Stack.Navigator initialRouteName="BookmarksMainScreen">
 			<Stack.Screen name="BookmarksMainScreen" component={BookmarksMainScreen}
