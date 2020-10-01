@@ -13,6 +13,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {selectBookmarksData,
 	addBookmark, removeBookmark} from 'state_slices/bookmarksSlice';
 
+import { useNavigation } from '@react-navigation/native';
+
 import themeColors from 'theme/colors';
 
 
@@ -60,11 +62,18 @@ const styles = StyleSheet.create({
 	content: {
 		fontSize: 15,
 	},
+	bottomPart: { //naming is tough...
+		flexDirection: 'row'
+	},
 	publisher: {
 		fontSize: 18
 	},
 	publishedAt: {
 		fontSize: 18
+	},
+	toWebViewIcon: {
+		marginTop: 'auto',
+		marginLeft: 'auto'
 	}
 
 });
@@ -72,6 +81,7 @@ const styles = StyleSheet.create({
 
 export default function NewsPiece(props) {
 	const dispatch = useDispatch();
+	const navigation = useNavigation();
 
 	const {
 		url,
@@ -80,7 +90,7 @@ export default function NewsPiece(props) {
 		title,
 		content,
 		publishedAt} = props.item;
-	const {publisher} = props.item.source;
+	const {name: publisher} = props.item.source;
 
 	const {item} = props;
 
@@ -103,6 +113,10 @@ export default function NewsPiece(props) {
 		(publishedAtObj.getMinutes() > 9
 			? publishedAtObj.getMinutes()
 			: '0' + publishedAtObj.getMinutes());
+
+	const openWebView = () => { //Navigate to
+		navigation.navigate('NewsPieceWebView');
+	}
 
 	return (
 		<View style={styles.container}>
@@ -144,7 +158,7 @@ export default function NewsPiece(props) {
 				<Text style={styles.content}>
 					{content}
 				</Text>
-				<View>
+				<View style={styles.bottomPart}>
 					<View>
 						<Text style={styles.publisher}>
 							{publisher}
@@ -153,8 +167,15 @@ export default function NewsPiece(props) {
 							{publishedAtReadable}
 						</Text>
 					</View>
-					{/* <View>
-					</View> */}
+					<TouchableHighlight
+						// onPress={() => alert(url)}
+						onPress={() => openWebView()}
+						style={styles.toWebViewIcon}
+					>
+						<MaterialCommunityIcons name="import"
+							size={26} color={'gray'}
+						/>
+					</TouchableHighlight>
 				</View>
 			</View>
 		</View>
