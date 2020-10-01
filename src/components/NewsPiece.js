@@ -43,9 +43,16 @@ const styles = StyleSheet.create({
 		padding: 12
 	},
 	
+	authorWrap: {
+		flexDirection: 'row'
+	},
 	author: {
 		fontSize: 17
 	},
+	bookmarkIcon: {
+		marginLeft: 'auto'
+	},
+
 	title: {
 		fontSize: 22,
 		fontWeight: 'bold'
@@ -107,12 +114,14 @@ export default function NewsPiece(props) {
 				}}
 			/>
 			<View style={styles.innerContainer}>
-				<View>
+				<View style={styles.authorWrap}>
 					<Text style={styles.author}>
 						{author}
 					</Text>
-					{isBookmarked && ( 
-						<TouchableHighlight onPress={() => dispatch(removeBookmark(item.url))}>
+					{isBookmarked && (
+						<TouchableHighlight onPress={() => dispatch(removeBookmark(item.url))}
+							style={styles.bookmarkIcon}
+						>
 							<MaterialCommunityIcons name="bookmark"
 								size={26} color={themeColors.accent}
 								// onPress={() => alert('Pressed!')}
@@ -120,7 +129,9 @@ export default function NewsPiece(props) {
 						</TouchableHighlight>
 					)}
 					{!isBookmarked && (
-						<TouchableHighlight onPress={() => dispatch(addBookmark({...item}))}>
+						<TouchableHighlight onPress={() => dispatch(addBookmark({...item}))}
+							style={styles.bookmarkIcon}
+						>
 							<MaterialCommunityIcons name="bookmark-outline"
 								size={26} color={'gray'}
 							/>

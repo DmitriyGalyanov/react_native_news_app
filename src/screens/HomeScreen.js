@@ -1,31 +1,17 @@
 import React from 'react';
 
-import {View} from 'react-native';
-
-import NewsList from 'components/NewsList';
-
 import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeMainScreen from './home/HomeMainScreen';
 
 import themeColors from 'theme/colors';
 
 
-function HomeMainScreen() {
-	return (
-		<View>
-			<NewsList />
-		</View>
-	)
-}
-
-
 const Stack = createStackNavigator();
 
-export default function HomeScreen() { // MainScreen
-
+export default function HomeScreen() {
 	return (
-		<Stack.Navigator initialRouteName="HomeMainScreen"
-			
-		>
+		<Stack.Navigator initialRouteName="HomeMainScreen">
 			<Stack.Screen name="HomeMainScreen" component={HomeMainScreen}
 				options={{
 					title: 'Home',
