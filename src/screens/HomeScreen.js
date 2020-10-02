@@ -4,17 +4,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeMainScreen from './home/HomeMainScreen';
 
-// import NewsPieceWebView from 'components/NewsPieceWebView';
+import NewsPieceWebView from 'components/NewsPieceWebView';
 
 import themeColors from 'theme/colors';
 
 
-const Stack = createStackNavigator();
+const HomeScreenStack = createStackNavigator();
 
 export default function HomeScreen() {
 	return (
-		<Stack.Navigator initialRouteName="HomeMainScreen">
-			<Stack.Screen name="HomeMainScreen" component={HomeMainScreen}
+		<HomeScreenStack.Navigator initialRouteName="HomeMainScreen">
+			<HomeScreenStack.Screen name="HomeMainScreen" component={HomeMainScreen}
 				options={{
 					title: 'Home',
 					headerStyle: {
@@ -23,15 +23,15 @@ export default function HomeScreen() {
 					headerTintColor: themeColors.accent
 				}}
 			/>
-			{/* <Stack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
+			<HomeScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
 				options={{
-					title: 'Bookmarks',
+					title: 'News Web View (HOME)',
 					headerStyle: {
 						backgroundColor: themeColors.main
 					},
 					headerTintColor: themeColors.accent
 				}}
-			/> */}
-		</Stack.Navigator>
+			/>
+		</HomeScreenStack.Navigator>
 	)
 }

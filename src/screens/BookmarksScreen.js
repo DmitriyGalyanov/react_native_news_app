@@ -9,12 +9,12 @@ import NewsPieceWebView from 'components/NewsPieceWebView';
 import themeColors from 'theme/colors';
 
 
-const Stack = createStackNavigator();
+export const BookmarksScreenStack = createStackNavigator();
 
 export default function BookmarksScreen() {
 	return (
-		<Stack.Navigator initialRouteName="BookmarksMainScreen">
-			<Stack.Screen name="BookmarksMainScreen" component={BookmarksMainScreen}
+		<BookmarksScreenStack.Navigator initialRouteName="BookmarksMainScreen">
+			<BookmarksScreenStack.Screen name="BookmarksMainScreen" component={BookmarksMainScreen}
 				options={{
 					title: 'Bookmarks',
 					headerStyle: {
@@ -23,15 +23,15 @@ export default function BookmarksScreen() {
 					headerTintColor: themeColors.accent
 				}}
 			/>
-			<Stack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
+			<BookmarksScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
 				options={{
-					title: 'Bookmarks',
+					title: 'News Web View (BOOKMARKS)',
 					headerStyle: {
 						backgroundColor: themeColors.main
 					},
 					headerTintColor: themeColors.accent
 				}}
 			/>
-		</Stack.Navigator>
+		</BookmarksScreenStack.Navigator>
 	)
 }

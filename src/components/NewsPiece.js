@@ -114,8 +114,10 @@ export default function NewsPiece(props) {
 			? publishedAtObj.getMinutes()
 			: '0' + publishedAtObj.getMinutes());
 
-	const openWebView = () => { //Navigate to
-		navigation.navigate('NewsPieceWebView');
+	const openWebView = (url) => {
+		navigation.navigate('NewsPieceWebView', {
+			uri: url
+		});
 	}
 
 	return (
@@ -169,7 +171,7 @@ export default function NewsPiece(props) {
 					</View>
 					<TouchableHighlight
 						// onPress={() => alert(url)}
-						onPress={() => openWebView()}
+						onPress={() => openWebView(url)}
 						style={styles.toWebViewIcon}
 					>
 						<MaterialCommunityIcons name="import"
