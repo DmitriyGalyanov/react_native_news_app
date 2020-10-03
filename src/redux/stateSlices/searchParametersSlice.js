@@ -10,7 +10,7 @@ export const searchParametersSlice = createSlice({
 			// category: '',
 			// sortBy: 'publishedAt',
 			endpoint: 'everything',
-			searchQuery: 're',
+			searchQuery: 'Trump',
 			country: '',
 			category: '',
 			sortBy: 'relevancy',
@@ -47,7 +47,10 @@ export const searchParametersSlice = createSlice({
 	}
 });
 
-export const {addBookmark, removeBookmark} = searchParametersSlice.actions;
+export const {editSearchQuery,
+	changeEndpoint,
+	changeCountry,
+	changeSortBy} = searchParametersSlice.actions;
 
 export const selectSearchParametersData = state => state.searchParametersSlice;
 
