@@ -2,13 +2,13 @@ import React from 'react';
 
 import {View} from 'react-native';
 
-import NewsList from 'components/NewsList';
+import HomeScreenNewsList from 'components/HomeScreenNewsList';
 
 
 export default function HomeMainScreen() {
 	return (
 		<View>
-			<NewsList />
+			<HomeScreenNewsList />
 		</View>
 	)
 }

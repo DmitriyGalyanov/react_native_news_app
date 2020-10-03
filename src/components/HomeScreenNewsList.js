@@ -4,13 +4,18 @@ import {View, FlatList, Text} from 'react-native';
 
 import NewsPiece from 'components/NewsPiece';
 
-export default function NewsList() {
+export default function HomeScreenNewsList() {
 
 	// there is an opinion that I will have to store those in Redux (to allow Redux-Persist save them)
 	// and search input field will be a different component (mb placed inside of the topbar)
 	const [searchQuery, setSearchQuery] = useState('react');
 
 	const limit = 20;
+
+	// const parentScreenName = 'HomeScreen';
+	const parentTabName = 'HomeScreen';
+	const parentStackName = 'HomeMainScreen';
+
 
 	const apiUrl = 'https://newsapi.org/v2/everything?' +
 		`q=${searchQuery}` +
@@ -51,7 +56,11 @@ export default function NewsList() {
 
 	const renderItem = (item) => {
 		return (
-			<NewsPiece {...item} />
+			<NewsPiece {...item}
+				// parentScreenName={parentScreenName}
+				parentTabName={parentTabName}
+				parentStackName={parentStackName}
+			/>
 		)
 	};
 

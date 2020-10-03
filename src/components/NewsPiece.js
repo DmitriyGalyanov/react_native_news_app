@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
 export default function NewsPiece(props) {
 	const dispatch = useDispatch();
 	const navigation = useNavigation();
+	// const {parentScreenName} = props;
+	const {parentTabName, parentStackName} = props;
 
 	const {
 		url,
@@ -98,7 +100,7 @@ export default function NewsPiece(props) {
 	const {entries: bookmarksList} = bookmarksData;
 
 	const isBookmarked =
-		bookmarksList.find(bookmark =>
+		bookmarksList?.find(bookmark =>
 			bookmark?.url === url
 		) ? true
 			: false
@@ -114,9 +116,13 @@ export default function NewsPiece(props) {
 			? publishedAtObj.getMinutes()
 			: '0' + publishedAtObj.getMinutes());
 
-	const openWebView = (url) => {
+	// const openWebView = (url) => {
+	const openWebView = () => {
 		navigation.navigate('NewsPieceWebView', {
-			uri: url
+			uri: url,
+			// parentScreenName: parentScreenName
+			parentTabName: parentTabName,
+			parentStackName: parentStackName
 		});
 	}
 
@@ -171,7 +177,8 @@ export default function NewsPiece(props) {
 					</View>
 					<TouchableHighlight
 						// onPress={() => alert(url)}
-						onPress={() => openWebView(url)}
+						// onPress={() => openWebView(url)}
+						onPress={() => openWebView()}
 						style={styles.toWebViewIcon}
 					>
 						<MaterialCommunityIcons name="import"

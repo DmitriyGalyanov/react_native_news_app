@@ -27,7 +27,7 @@ export default function BottomNavTab() {
 					)
 				}}
 			/>
-			<Tab.Screen name="BookmarksList" component={BookmarksScreen}
+			<Tab.Screen name="BookmarksScreen" component={BookmarksScreen}
 				options={{
 					title: 'Bookmarks',
 					

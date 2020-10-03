@@ -8,29 +8,12 @@ import {useSelector} from 'react-redux';
 import {selectBookmarksData} from 'state_slices/bookmarksSlice';
 
 export default function BookmarksList() {
-
-	// // there is an opinion that I will have to store those in Redux (to allow Redux-Persist save them)
-	// // and search input field will be a different component (mb placed inside of the topbar)
-	// const [searchQuery, setSearchQuery] = useState('react');
-
-	// const limit = 20;
-
-	// const apiUrl = 'https://newsapi.org/v2/everything?' +
-	// 	`q=${searchQuery}` +
-	// 	'&apiKey=3f1d580b86b6414e8be8098c17351375' +
-	// 	// '&sortBy=relevancy' +
-	// 	`&pageSize=${limit}`;
-
-	// useEffect(() => {
-	// 	onRefresh();
-	// }, []);
+	const parentTabName = 'BookmarksScreen',
+				parentStackName = 'BookmarksMainScreen';
 
 	const bookmarksData = useSelector(selectBookmarksData);
-	// console.log(bookmarksData);
 	const {entries: list} = bookmarksData;
 
-
-	// const [list, setList] = useState([]);
 	const isListLoading = false;
 	const [isError, setIsError] = useState(false);
 
@@ -59,7 +42,11 @@ export default function BookmarksList() {
 
 	const renderItem = (item) => {
 		return (
-			<NewsPiece {...item} />
+			<NewsPiece {...item}
+				// parentScreenName={parentScreenName}
+				parentTabName={parentTabName}
+				parentStackName={parentStackName}
+			/>
 		)
 	};
 
