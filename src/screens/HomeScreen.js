@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {View, Dimensions, StyleSheet} from 'react-native';
 
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import SearchBar from 'components/SearchBar';
 
 import HomeMainScreen from './home/HomeMainScreen';
 
 import NewsPieceWebView from 'components/NewsPieceWebView';
-
 
 import themeColors from 'theme/colors';
 
@@ -26,7 +25,13 @@ export default function HomeScreen() {
 						backgroundColor: themeColors.main
 					},
 					headerTintColor: themeColors.accent,
-					headerRight: () => <SearchBar />
+					headerRight: () => {
+						return (
+							<View style={styles.searchBar}>
+								<SearchBar />
+							</View>
+						)
+					}
 				}}
 			/>
 			<HomeScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
@@ -41,3 +46,13 @@ export default function HomeScreen() {
 		</HomeScreenStack.Navigator>
 	)
 }
+
+const {width: windowWidth} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+	searchBar: {
+		marginRight: windowWidth * 0.075,
+		// alignSelf: "center"
+		// why it centers only after first animation?
+	}
+});

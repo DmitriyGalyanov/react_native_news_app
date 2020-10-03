@@ -1,8 +1,7 @@
 import React, {useRef, useState} from 'react';
 
-import {TextInput,
-	StyleSheet, View,
-	Animated, Button
+import {View, TextInput,
+	Animated, StyleSheet
 } from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -20,14 +19,13 @@ export default function SearchBar() {
 	const dispatch = useDispatch();
 
 	const initWidth = 0;
-	const openWidth = 150; //mb will be responsive (dimension can help)
+	const openWidth = 240; //mb will be responsive (dimension can help)
 	const {defaultAnimTime: animTime} = animations;
 
 	const [isOpen, setIsOpen] = useState(false);
 
 	const searchBarWidth = useRef(new Animated.Value(initWidth)).current;
 	const searchBarOpacity = useRef(new Animated.Value(0)).current;
-	// const magnifyIconOpacity = useRef(new Animated.Value(1)).current;
 
 	const openSearchBar = () => {
 		if(isOpen) return;
@@ -54,56 +52,55 @@ export default function SearchBar() {
 
 	const searchQueryInit = useSelector(selectSearchParametersData)
 		.entries.searchQuery;
-
 	const [value, setValue] = useState(searchQueryInit);
 
 	return (
 		<View style={styles.container}>
 			<Animated.View
 				style={[
-					// styles.animatedSearchBar,
+					styles.searchBarWrap,
 					{
 						width: searchBarWidth,
 						opacity: searchBarOpacity
 					}
 				]}
 			>
-				<TextInput
+				<TextInput style={styles.searchBarInput}
 					placeholder='search'
 					onChangeText={text => setValue(text)}
 					value={value}
 				/>
 			</Animated.View>
 			
-			<Animated.View
-				// style={[
-				// 	// styles.animatedSearchBar,
-				// 	{
-				// 		opacity: magnifyIconOpacity
-				// 	}
-				// ]}
-			>
+			<Animated.View style={styles.magnifierIcon}>
 				<MaterialCommunityIcons name='magnify'
 					size={26} color='green'
-					// onPress={openSearchBar}
 					onPress={handleMagnifierClick}
 				/>
 			</Animated.View>
-
-			<View style={[
-					{
-						flexDirection: "column"
-					}
-				]}>
-				<Button title="Open" onPress={openSearchBar} />
-				<Button title="Close" onPress={closeSearchBar} />
-			</View>
 		</View>
 	)
 }
 
+
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+	},
+	magnifierIcon: {
+		position: "absolute",
+		right: 4,
+		top: 3
+	},
+	searchBarWrap: {
+		backgroundColor: 'white',
+		borderRadius: 10,
+		height: 34,
+	},
+	searchBarInput: {
+		paddingTop: 8,
+		paddingBottom: 8,
+		paddingLeft: 10,
+		lineHeight: 18
 	}
-})
+});
