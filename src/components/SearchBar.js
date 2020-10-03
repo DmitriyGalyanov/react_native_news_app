@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 
 import {TextInput,
 	StyleSheet, View,
@@ -8,61 +8,38 @@ import {TextInput,
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import animations,
+	{changeWidthAnim,
+	fadeInAnim, fadeOutAnim} from 'theme/animations';
+
 
 export default function SearchBar() {
 	const initWidth = 0;
-	const openWidth = 150; //mb will be responsive
-	const animTime = 2000;
+	const openWidth = 150; //mb will be responsive (dimension can help)
+	const {defaultAnimTime: animTime} = animations;
+
+	const [isOpen, setIsOpen] = useState(false);
 
 	const searchBarWidth = useRef(new Animated.Value(initWidth)).current;
 	const searchBarOpacity = useRef(new Animated.Value(0)).current;
 	const magnifyIconOpacity = useRef(new Animated.Value(1)).current;
 
-	const extensionAnim = (target) => {
-		Animated.timing(target, {
-			toValue: openWidth,
-			duration: animTime,
-			useNativeDriver: false
-		}).start();
-	};
-	const compressAnim = (target) => {
-		Animated.timing(target, {
-			toValue: initWidth,
-			duration: animTime,
-			useNativeDriver: false
-		}).start();
-	};
-
-	const fadeInAnim = (target) => {
-		Animated.timing(target, {
-			toValue: 1,
-			duration: animTime,
-			useNativeDriver: false
-		}).start();
-	};
-
-	const fadeOutAnim = (target) => {
-		Animated.timing(target, {
-			toValue: 0,
-			duration: animTime,
-			useNativeDriver: false
-		}).start();
-	};
-
 	const openSearchBar = () => {
-		console.log('openSearchBar');
-		extensionAnim(searchBarWidth);
-		fadeOutAnim(magnifyIconOpacity);
-		fadeInAnim(searchBarOpacity);
-	}
+		if(isOpen) return;
+		setIsOpen(true);
+		changeWidthAnim(searchBarWidth, openWidth, animTime);
+		fadeOutAnim(magnifyIconOpacity, animTime);
+		fadeInAnim(searchBarOpacity, animTime);
+	};
 	const closeSearchBar = () => {
-		console.log('closeSearchBar');
-		compressAnim(searchBarWidth);
-		fadeInAnim(magnifyIconOpacity);
-		fadeOutAnim(searchBarOpacity);
-	}
+		if (!isOpen) return;
+		changeWidthAnim(searchBarWidth, initWidth, animTime);
+		fadeInAnim(magnifyIconOpacity, animTime);
+		fadeOutAnim(searchBarOpacity, animTime);
+		setIsOpen(false);
+	};
 
-
+	const [value, setValue] = useState(''); //will be connected with Redux
 
 	return (
 		<View style={styles.container}>
@@ -76,6 +53,7 @@ export default function SearchBar() {
 			>
 				<MaterialCommunityIcons name='magnify'
 					size={26} color='green'
+					onPress={openSearchBar}
 				/>
 			</Animated.View>
 
@@ -83,14 +61,19 @@ export default function SearchBar() {
 				style={[
 					// styles.animatedSearchBar,
 					{
-						width: searchBarWidth
+						width: searchBarWidth,
+						opacity: searchBarOpacity
 					}
 				]}
 			>
 				<TextInput
 					placeholder='search'
+					onChangeText={text => setValue(text)}
+					value={value}
 				/>
 			</Animated.View>
+
+
 			<View style={[
 					{
 						flexDirection: "column"

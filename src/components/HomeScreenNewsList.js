@@ -2,30 +2,37 @@ import React, {useState, useEffect} from 'react';
 
 import {View, FlatList, Text} from 'react-native';
 
+import {useSelector} from 'react-redux';
+import {selectSearchParametersData} from 'state_slices/searchParametersSlice';
+
 import NewsPiece from 'components/NewsPiece';
 
 export default function HomeScreenNewsList() {
-
-	// there is an opinion that I will have to store those in Redux (to allow Redux-Persist save them)
-	// and search input field will be a different component (mb placed inside of the topbar)
-	const [searchQuery, setSearchQuery] = useState('react');
-
-	const limit = 20;
-
-	// const parentScreenName = 'HomeScreen';
 	const parentTabName = 'HomeScreen';
 	const parentStackName = 'HomeMainScreen';
 
+	const apiSrc = 'https://newsapi.org/v2/';
+	const apiKey = '3f1d580b86b6414e8be8098c17351375';
 
-	const apiUrl = 'https://newsapi.org/v2/everything?' +
-		`q=${searchQuery}` +
-		'&apiKey=3f1d580b86b6414e8be8098c17351375' +
-		// '&sortBy=relevancy' +
-		`&pageSize=${limit}`;
+	const pageSize = 20;
+
+	const searchParametersData = useSelector(selectSearchParametersData).entries;
+	const {endpoint,
+		searchQuery,
+		country,
+		category,
+		sortBy} = searchParametersData;
+
+	const apiUrl = apiSrc + endpoint +
+		`?apiKey=${apiKey}` + `&pageSize=${pageSize}` +
+		`&q=${searchQuery}` +
+		`&country=${country}` +
+		`&sortBy=${sortBy}`
+	;
 
 	useEffect(() => {
 		onRefresh();
-	}, []);
+	}, [searchParametersData]);
 
 
 	const [list, setList] = useState([]);
@@ -34,7 +41,7 @@ export default function HomeScreenNewsList() {
 
 	const getMoreData = (isRefreshing = false) => {
 		const offset = isRefreshing ? 0 : list.length;
-		const page = Math.ceil(offset / limit) + 1;
+		const page = Math.ceil(offset / pageSize) + 1;
 
 		fetch(`${apiUrl}&page=${page}`)
 			.then(response => response.json())
@@ -57,7 +64,6 @@ export default function HomeScreenNewsList() {
 	const renderItem = (item) => {
 		return (
 			<NewsPiece {...item}
-				// parentScreenName={parentScreenName}
 				parentTabName={parentTabName}
 				parentStackName={parentStackName}
 			/>
