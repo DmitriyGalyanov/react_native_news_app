@@ -2,9 +2,14 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import SearchBar from 'components/SearchBar';
+
 import HomeMainScreen from './home/HomeMainScreen';
 
 import NewsPieceWebView from 'components/NewsPieceWebView';
+
 
 import themeColors from 'theme/colors';
 
@@ -20,7 +25,8 @@ export default function HomeScreen() {
 					headerStyle: {
 						backgroundColor: themeColors.main
 					},
-					headerTintColor: themeColors.accent
+					headerTintColor: themeColors.accent,
+					headerRight: () => <SearchBar />
 				}}
 			/>
 			<HomeScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
