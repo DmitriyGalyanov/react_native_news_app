@@ -50,6 +50,10 @@ export default function SearchBar() {
 		if(isOpen) sendSearchRequest();
 	};
 
+	const handleEnterPress = () => {
+		sendSearchRequest();
+	}
+
 	const searchQueryInit = useSelector(selectSearchParametersData)
 		.entries.searchQuery;
 	const [value, setValue] = useState(searchQueryInit);
@@ -67,8 +71,9 @@ export default function SearchBar() {
 			>
 				<TextInput style={styles.searchBarInput}
 					placeholder='search'
-					onChangeText={text => setValue(text)}
 					value={value}
+					onChangeText={text => setValue(text)}
+					onSubmitEditing={() => handleEnterPress()}
 				/>
 			</Animated.View>
 			

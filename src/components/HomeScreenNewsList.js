@@ -36,10 +36,11 @@ export default function HomeScreenNewsList() {
 
 
 	const [list, setList] = useState([]);
-	const isListLoading = false;
+	const [isUpdating, setIsUpdating] = useState(false);
 	const [isError, setIsError] = useState(false);
 
 	const getMoreData = (isRefreshing = false) => {
+		setIsUpdating(true);
 		const offset = isRefreshing ? 0 : list.length;
 		const page = Math.ceil(offset / pageSize) + 1;
 
@@ -49,6 +50,7 @@ export default function HomeScreenNewsList() {
 				setList(isRefreshing
 					? json.articles
 					: list.concat(json.articles))
+				setIsUpdating(false);
 			})
 			.catch(error => setIsError(true)) //handle it somehow later
 	};
@@ -82,11 +84,11 @@ export default function HomeScreenNewsList() {
 			<FlatList
 				data={list}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.url} /* temporary...? */
-				refreshing={isListLoading}
+				keyExtractor={(item) => item.url}
+				refreshing={isUpdating}
 				onRefresh={onRefresh}
 				onEndReached={onScrollToEnd}
-				onEndReachedThreshold={0.05}
+				onEndReachedThreshold={0.15}
 			/>
 		</View>
 	)
