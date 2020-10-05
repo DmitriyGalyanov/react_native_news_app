@@ -14,14 +14,15 @@ import store from 'app_redux/store';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import BottomNavTab from 'navs/BottomNavTab';
+// import BottomNavTab from 'navs/BottomNavTab';
+import MainDrawerNav from 'navs/MainDrawerNav';
 
 
 const App: () => React$Node = () => {
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
-				<BottomNavTab />
+				<MainDrawerNav />
 			</NavigationContainer>
 		</Provider>
 	);

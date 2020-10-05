@@ -61,7 +61,7 @@ export default function HomeScreenNewsList() {
 
 	const onScrollToEnd = () => {
 		getMoreData(false);
-	}
+	};
 
 	const renderItem = (item) => {
 		return (
