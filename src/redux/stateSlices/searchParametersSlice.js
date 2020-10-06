@@ -13,6 +13,7 @@ export const searchParametersSlice = createSlice({
 			searchQuery: 'Trump',
 			country: '',
 			category: '',
+			language: 'en',
 			sortBy: 'relevancy',
 		},
 	},
@@ -39,6 +40,11 @@ export const searchParametersSlice = createSlice({
 			state.entries.country = country;
 		},
 
+		changeLanguage: (state, action) => {
+			const language = action.payload;
+			state.entries.language = language;
+		},
+
 		changeSortBy: (state, action) => {
 			//has to be disabled if endpoint === top-headlines
 			const sortBy = action.payload;
@@ -50,6 +56,7 @@ export const searchParametersSlice = createSlice({
 export const {editSearchQuery,
 	changeEndpoint,
 	changeCountry,
+	changeLanguage,
 	changeSortBy} = searchParametersSlice.actions;
 
 export const selectSearchParametersData = state => state.searchParametersSlice;

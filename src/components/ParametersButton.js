@@ -14,29 +14,14 @@ export default function ParametersButton(props) {
 
 	const {title,
 		parameterType, value,
+		onPress: handlePress,
 		disabled} = props;
-
-	// const action = () => {
-	// 	switch(parameterType) {
-	// 		// case 'category': {
-	// 		// 	return console.log();
-	// 		// };
-	// 		default: return console.log();
-	// 	}
-	// }
-
-	// const handlePress = () => {
-	// 	action('12');
-	// 	console.log('type', parameterType);
-	// 	console.log('value', value);
-		
-	// }
 
 	return (
 		<View style={styles.wrap}>
 			<Button
 				title={title}
-				onPress={() => handlePress()}
+				onPress={() => handlePress(value)}
 				disabled={disabled}
 			/>
 		</View>
@@ -46,15 +31,5 @@ export default function ParametersButton(props) {
 const styles = StyleSheet.create({
 	wrap: {
 		minWidth: 130
-		// flexBasis: 80,
-		// flexBasis: 70,
-		// height: 40
-		// flex: 1
-		// flexGrow: 1,
-		// marginHorizontal: 10
-		
-		// flexBasis: 80
-		// width: windowWidth * 0.2
-		// width: 100
 	},
 });

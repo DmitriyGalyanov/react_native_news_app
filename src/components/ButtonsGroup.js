@@ -3,45 +3,54 @@ import React from 'react';
 import {View, Text,
 	StyleSheet} from 'react-native';
 
-// import {useDispatch} from 'react-redux';
-// import {changeEndpoint,
-// 	changeCountry} from 'state_slices/searchParametersSlice';
+import {useDispatch} from 'react-redux';
+import {changeEndpoint,
+	changeCountry,
+	changeLanguage,
+	changeSortBy} from 'state_slices/searchParametersSlice';
 
 import ParametersButton from 'components/ParametersButton';
 
 
 export default function ButtonsGroup(props) {
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	const {row,
 		header,
 		parameterType,
 		buttonsData} = props;
 
-	// const dispatchAction = () => {
-	// 	switch(parameterType) {
-	// 		case 'endpoint': {
-	// 			return dispatch(changeEndpoint());
-	// 		};
-	// 		case 'country': {
-	// 			return dispatch(changeCountry());
-	// 		};
-	// 		// case 'category': {
-	// 		// 	return console.log('tes')
-	// 		// }
-	// 		// default: {
-	// 		// 	return console.log('test');
-	// 		// }
-	// 	}
-	// };
+	const handlePress = (value) => { //questionable solution
+		switch(parameterType) {
+			case 'endpoint': {
+				dispatch(changeEndpoint(value));
+				break;
+			};
+			case 'country': {
+				dispatch(changeCountry(value));
+				break;
+			};
+			case 'language': {
+				dispatch(changeLanguage(value));
+				break;
+			};
+			case 'sortBy': {
+				dispatch(changeSortBy(value));
+				break;
+			};
+		}
+	};
 
 	return (
-		<View>
-			<Text style={styles.header}>
+		<View style={styles.wrap}>
+			<Text style={[
+					styles.header,
+					{alignSelf: row ? 'flex-start' : 'center'}
+				]}>
 				{header}
 			</Text>
 			<View style={[
-					styles.wrap,
+					styles.list,
 					{flexDirection: row ? 'row' : 'column'}
 				]}
 			>
@@ -51,7 +60,7 @@ export default function ButtonsGroup(props) {
 						parameterType={parameterType}
 						title={title}
 						value={value}
-						
+						onPress={handlePress}
 					/>
 				})}
 			</View>
@@ -60,22 +69,13 @@ export default function ButtonsGroup(props) {
 }
 
 const styles = StyleSheet.create({
-	wrap: { //give it a border?
-		// flexDirection: "row",
-		// paddingHorizontal: 10,
-		paddingHorizontal: 20,
+	wrap: {
+		paddingHorizontal: 20
+	},
+	header: {
+	},
+	list: { //give it a border?
 		justifyContent: "space-between",
 		flexWrap: "wrap"
 	},
-	header: {
-		alignSelf: 'center'
-	}
-	// buttonWrap: {
-	// 	// flexGrow: 1,
-	// 	// marginHorizontal: 10
-		
-	// 	// flexBasis: 80
-	// 	// width: windowWidth * 0.2
-	// 	// width: 100
-	// }
 });
