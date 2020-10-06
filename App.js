@@ -6,6 +6,12 @@
  * @flow strict-local
  */
 
+
+if(__DEV__) {
+	import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+};
+import Reactotron from 'reactotron-react-native';
+
 import 'react-native-gesture-handler'; // to index.js?
 import React from 'react';
 
@@ -19,6 +25,7 @@ import MainDrawerNav from 'navs/MainDrawerNav';
 
 
 const App: () => React$Node = () => {
+	Reactotron.log('hello rendering world'); //e.g
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
