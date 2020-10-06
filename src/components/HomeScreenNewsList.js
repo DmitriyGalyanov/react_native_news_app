@@ -20,19 +20,35 @@ export default function HomeScreenNewsList() {
 	const {endpoint,
 		searchQuery,
 		country,
+		language,
 		category,
 		sortBy} = searchParametersData;
-
-	const apiUrl = apiSrc + endpoint +
+	
+	const topHeadlinesUrl = apiSrc + 'top-headlines' +
 		`?apiKey=${apiKey}` + `&pageSize=${pageSize}` +
 		`&q=${searchQuery}` +
 		`&country=${country}` +
+		`&category=${category}`
+	;
+
+	const everythingUrl = apiSrc + 'everything' +
+		`?apiKey=${apiKey}` + `&pageSize=${pageSize}` +
+		`&q=${searchQuery}` +
+		`&language=${language}` +
 		`&sortBy=${sortBy}`
 	;
 
+	const apiUrl = () => {
+		switch(endpoint) {
+			case 'top-headlines': return topHeadlinesUrl;
+			case 'everything': return everythingUrl;
+			default: return topHeadlinesUrl;
+		};
+	};
+
 	useEffect(() => {
 		onRefresh();
-	}, [searchParametersData]);
+	}, [searchParametersData]); //[apiUrl]
 
 
 	const [list, setList] = useState([]);
@@ -44,7 +60,7 @@ export default function HomeScreenNewsList() {
 		const offset = isRefreshing ? 0 : list.length;
 		const page = Math.ceil(offset / pageSize) + 1;
 
-		fetch(`${apiUrl}&page=${page}`)
+		fetch(`${apiUrl()}&page=${page}`)
 			.then(response => response.json())
 			.then(json => {
 				setList(isRefreshing

@@ -4,8 +4,21 @@ import {View} from 'react-native';
 
 import ButtonsGroup from 'components/ButtonsGroup';
 
+import {useSelector} from 'react-redux';
+import {
+	selectSearchParametersData} from 'state_slices/searchParametersSlice';
 
-export default function SearchParametersRoute() {
+
+export default function SearchParametersScreen() {
+	const searchParametersData = useSelector(selectSearchParametersData).entries;
+	const {endpoint,
+		country,
+		language,
+		category,
+		sortBy
+	} = searchParametersData;
+
+
 	const endpointButtons = [
 		{
 			title: 'Top headlines',
@@ -15,7 +28,7 @@ export default function SearchParametersRoute() {
 			title: 'Everything',
 			value: 'everything'
 		}
-	]; //works with 'top-headlines'
+	];
 	const categoryButtons = [
 		{
 			title: 'Business',
@@ -28,10 +41,6 @@ export default function SearchParametersRoute() {
 		{
 			title: 'General',
 			value: 'general'
-		},
-		{
-			title: 'Business',
-			value: 'business'
 		},
 		{
 			title: 'Health',
@@ -49,7 +58,11 @@ export default function SearchParametersRoute() {
 			title: 'Technology',
 			value: 'technology'
 		},
-	]; //works with 'top-headlines'
+		{
+			title: 'Any',
+			value: ''
+		}
+	];
 	const countryButtons = [
 		{
 			title: 'USA',
@@ -83,7 +96,7 @@ export default function SearchParametersRoute() {
 			title: 'Any',
 			value: ''
 		},
-	]; //works with 'top-headlines'
+	];
 	const languageButtons = [
 		{
 			title: 'English',
@@ -93,7 +106,7 @@ export default function SearchParametersRoute() {
 			title: 'Russian',
 			value: 'ru'
 		}
-	]; //works with 'everything'
+	];
 	const sortByButtons = [
 		{
 			title: 'Relevancy',
@@ -107,37 +120,50 @@ export default function SearchParametersRoute() {
 			title: 'Published at',
 			value: 'publishedAt'
 		},
-	]; //works with 'everything'
+	];
 
 	return (
 		<View>
 			<ButtonsGroup row
 				header='Endpoint'
 				parameterType='endpoint'
+				parameterValue={endpoint}
 				buttonsData={endpointButtons}
 			/>
 			<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 				<ButtonsGroup
 					header='Country'
 					parameterType='country'
+					parameterValue={country}
 					buttonsData={countryButtons}
+					disabled={endpoint === 'everything'}
+					disabledNote='only applicable with Top Headlines endpoint'
 				/>
 				<ButtonsGroup
 					header='Category'
 					parameterType='category'
+					parameterValue={category}
 					buttonsData={categoryButtons}
+					disabled={endpoint === 'everything'}
+					disabledNote='only applicable with Top Headlines endpoint'
 				/>
 			</View>
 			<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 				<ButtonsGroup
 					header='News Language'
 					parameterType='language'
+					parameterValue={language}
 					buttonsData={languageButtons}
+					disabled={endpoint === 'top-headlines'}
+					disabledNote='only applicable with Everything endpoint'
 				/>
 				<ButtonsGroup
 					header='Sort by'
 					parameterType='sortBy'
+					parameterValue={sortBy}
 					buttonsData={sortByButtons}
+					disabled={endpoint === 'top-headlines'}
+					disabledNote='only applicable with Everything endpoint'
 				/>
 			</View>
 			{/*large search bar*/}

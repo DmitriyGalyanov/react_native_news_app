@@ -14,6 +14,8 @@ import animations,
 	{changeWidthAnim,
 	fadeInAnim, fadeOutAnim} from 'theme/animations';
 
+import themeColors from 'theme/colors';
+
 
 export default function SearchBar() {
 	const dispatch = useDispatch();
@@ -79,7 +81,7 @@ export default function SearchBar() {
 			
 			<Animated.View style={styles.magnifierIcon}>
 				<MaterialCommunityIcons name='magnify'
-					size={26} color='green'
+					size={26} color={themeColors.secondary}
 					onPress={handleMagnifierClick}
 				/>
 			</Animated.View>
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	magnifierIcon: {
+		// why does it autocenter after bar expand??
 		position: "absolute",
 		right: 4,
 		top: 3

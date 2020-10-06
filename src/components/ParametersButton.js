@@ -2,27 +2,26 @@ import React from 'react';
 
 import {View, Button, StyleSheet} from 'react-native';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {changeEndpoint,
-	changeCountry} from 'state_slices/searchParametersSlice';
-
 import themeColors from 'theme/colors';
 
 
 export default function ParametersButton(props) {
-	const dispatch = useDispatch();
 
 	const {title,
 		parameterType, value,
 		onPress: handlePress,
-		disabled} = props;
+		disabled, chosen} = props;
+
+	let wrapStyles = [styles.wrap];
+	// if (chosen) wrapStyles.push(styles.chosen);
 
 	return (
-		<View style={styles.wrap}>
+		<View style={wrapStyles}>
 			<Button
 				title={title}
 				onPress={() => handlePress(value)}
 				disabled={disabled}
+				color={chosen ? themeColors.secondary : themeColors.main}
 			/>
 		</View>
 	)
@@ -31,5 +30,7 @@ export default function ParametersButton(props) {
 const styles = StyleSheet.create({
 	wrap: {
 		minWidth: 130
+	},
+	chosen: {
 	},
 });

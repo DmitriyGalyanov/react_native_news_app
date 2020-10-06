@@ -4,23 +4,14 @@ export const searchParametersSlice = createSlice({
 	name: 'searchParametersData',
 	initialState: {
 		entries: {
-			// endpoint: 'top-headlines',
-			// searchQuery: '',
-			// country: 'us',
-			// category: '',
-			// sortBy: 'publishedAt',
 			endpoint: 'everything',
 			searchQuery: 'Trump',
-			country: '',
+			country: 'us',
 			category: '',
 			language: 'en',
 			sortBy: 'relevancy',
 		},
 	},
-	// top-headlines (endpoint) doesn't work with sortBy
-	// everything (endpoint) can't be mixed with country and category?
-
-	// this section needs tests
 	reducers: {
 		editSearchQuery: (state, action) => {
 			const query = action.payload;
@@ -35,9 +26,13 @@ export const searchParametersSlice = createSlice({
 		},
 
 		changeCountry: (state, action) => {
-			//has to be disabled if endpoint === everything
 			const country = action.payload;
 			state.entries.country = country;
+		},
+
+		changeCategory: (state, action) => {
+			const category = action.payload;
+			state.entries.category = action.payload;
 		},
 
 		changeLanguage: (state, action) => {
@@ -46,7 +41,6 @@ export const searchParametersSlice = createSlice({
 		},
 
 		changeSortBy: (state, action) => {
-			//has to be disabled if endpoint === top-headlines
 			const sortBy = action.payload;
 			state.entries.sortBy = sortBy;
 		}
@@ -56,6 +50,7 @@ export const searchParametersSlice = createSlice({
 export const {editSearchQuery,
 	changeEndpoint,
 	changeCountry,
+	changeCategory,
 	changeLanguage,
 	changeSortBy} = searchParametersSlice.actions;
 

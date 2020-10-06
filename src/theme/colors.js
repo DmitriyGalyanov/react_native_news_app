@@ -1,4 +1,5 @@
 export default {
-	main: 'pink',
-	accent: 'orange'
+	main: '#2196F3',
+	secondary: 'teal',
+	accent: 'white',
 }

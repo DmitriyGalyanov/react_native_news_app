@@ -6,6 +6,7 @@ import {View, Text,
 import {useDispatch} from 'react-redux';
 import {changeEndpoint,
 	changeCountry,
+	changeCategory,
 	changeLanguage,
 	changeSortBy} from 'state_slices/searchParametersSlice';
 
@@ -15,9 +16,9 @@ import ParametersButton from 'components/ParametersButton';
 export default function ButtonsGroup(props) {
 	const dispatch = useDispatch();
 
-	const {row,
-		header,
-		parameterType,
+	const {row, header,
+		parameterType, parameterValue,
+		disabled, disabledNote,
 		buttonsData} = props;
 
 	const handlePress = (value) => { //questionable solution
@@ -30,6 +31,10 @@ export default function ButtonsGroup(props) {
 				dispatch(changeCountry(value));
 				break;
 			};
+			case 'category': {
+				dispatch(changeCategory(value));
+				break;
+			}
 			case 'language': {
 				dispatch(changeLanguage(value));
 				break;
@@ -61,9 +66,18 @@ export default function ButtonsGroup(props) {
 						title={title}
 						value={value}
 						onPress={handlePress}
+						disabled={disabled}
+						chosen={parameterValue === value}
 					/>
 				})}
 			</View>
+			{disabled && (
+				<View style={styles.disabledNoteWrap}>
+					<Text style={styles.disabledNote}>
+						{`${header} is ${disabledNote}`}
+					</Text>
+				</View>
+			)}
 		</View>
 	)
 }
@@ -78,4 +92,12 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		flexWrap: "wrap"
 	},
+	disabledNoteWrap: {
+		flexDirection: "row",
+	},
+	disabledNote: {
+		flex: 1,
+		flexWrap: "wrap",
+		textAlign: "center"
+	}
 });
