@@ -57,7 +57,9 @@ export default function MainDrawerContent(props) {
 	return (
 		<DrawerContentScrollView {...props}>
 			<DrawerItemList {...props} />
-			<Divider />
+			<Divider
+				style={{marginHorizontal: 10,}}
+			/>
 			<ParametersButtonsGroup wrapStyle={styles.languageButtonsWrap}
 				row
 				buttonsStyle={styles.button}

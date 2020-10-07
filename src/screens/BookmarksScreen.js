@@ -33,6 +33,7 @@ export default function BookmarksScreen() {
 	return (
 		<BookmarksScreenStack.Navigator initialRouteName="BookmarksMainScreen"
 			screenOptions={topBarStyleOptions}
+			headerMode='screen'
 		>
 			<BookmarksScreenStack.Screen name="BookmarksMainScreen" component={BookmarksMainScreen}
 				options={{

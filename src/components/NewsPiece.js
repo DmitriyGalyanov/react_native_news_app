@@ -80,6 +80,8 @@ export default function NewsPiece(props) {
 					</Text>
 					{isBookmarked && (
 						<TouchableHighlight onPress={() => dispatch(removeBookmark(item.url))}
+							underlayColor={themeColors.main}
+							activeOpacity={0.95}
 							style={styles.bookmarkIcon}
 						>
 							<MaterialCommunityIcons name="bookmark"
@@ -89,6 +91,8 @@ export default function NewsPiece(props) {
 					)}
 					{!isBookmarked && (
 						<TouchableHighlight onPress={() => dispatch(addBookmark({...item}))}
+							underlayColor={themeColors.main}
+							activeOpacity={0.95}
 							style={styles.bookmarkIcon}
 						>
 							<MaterialCommunityIcons name="bookmark-outline"
@@ -113,6 +117,8 @@ export default function NewsPiece(props) {
 						</Text>
 					</View>
 					<TouchableHighlight
+						underlayColor={themeColors.main}
+						activeOpacity={0.95}
 						onPress={() => openWebView()}
 						style={styles.toWebViewIcon}
 					>

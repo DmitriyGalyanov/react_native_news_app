@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 
 // import ButtonsGroup from 'components/ButtonsGroup';
 import ParametersButtonsGroup from 'components/ParametersButtonsGroup';
@@ -214,7 +214,7 @@ export default function SearchParametersScreen() {
 	};
 
 	return (
-		<View>
+		<ScrollView>
 			<ParametersButtonsGroup row
 				header={endpointTitle}
 				parameterValue={endpoint}
@@ -258,6 +258,6 @@ export default function SearchParametersScreen() {
 				/>
 			</View>
 			{/*large search bar*/}
-		</View>
+		</ScrollView>
 	)
 }

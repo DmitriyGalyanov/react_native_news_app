@@ -11,6 +11,8 @@ import ParametersScreen from 'screens/ParametersScreen';
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
+import mainDrawerContentOptions from 'theme/mainDrawerContentOptions';
+
 // import themeColors from 'theme/colors';
 
 
@@ -33,6 +35,7 @@ export default function MainDrawerNav() {
 
 	return (
 		<Drawer.Navigator initialRouteName="MainScreen"
+			drawerContentOptions={mainDrawerContentOptions}
 			drawerContent={(props) => <MainDrawerContent {...props} />}
 		>
 			<Drawer.Screen name="MainScreen" component={BottomNavTab}

@@ -30,6 +30,7 @@ export default function ParametersScreen() {
 		<ParametersScreenStack.Navigator
 			initialRouteName="SearchParametersScreen"
 			screenOptions={topBarStyleOptions}
+			headerMode='screen'
 		>
 			<ParametersScreenStack.Screen name="SearchParametersScreen"
 				component={SearchParametersScreen}

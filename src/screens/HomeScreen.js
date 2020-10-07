@@ -21,6 +21,7 @@ import topBarStyleOptions from 'theme/topBarStyleOptions';
 const HomeScreenStack = createStackNavigator();
 
 export default function HomeScreen() {
+
 	const [localization, setLocalization] = useState({});
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
@@ -38,6 +39,7 @@ export default function HomeScreen() {
 	return (
 		<HomeScreenStack.Navigator initialRouteName="HomeMainScreen"
 			screenOptions={topBarStyleOptions}
+			headerMode='screen'
 		>
 			<HomeScreenStack.Screen name="HomeMainScreen" component={HomeMainScreen}
 				options={{
@@ -54,7 +56,6 @@ export default function HomeScreen() {
 			<HomeScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
 				options={{
 					title: `${newsPieceWebViewScreenTitle}`,
-					//NewsPiece title (truncated if needed) ?
 				}}
 			/>
 		</HomeScreenStack.Navigator>
