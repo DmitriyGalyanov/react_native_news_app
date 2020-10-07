@@ -24,7 +24,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import MainDrawerNav from 'navs/MainDrawerNav';
+import RootDrawerNav from 'navs/RootDrawerNav';
 
 
 const App: () => React$Node = () => {
@@ -36,7 +36,7 @@ const App: () => React$Node = () => {
 				persistor={persistor}
 			>
 				<NavigationContainer>
-					<MainDrawerNav />
+					<RootDrawerNav />
 				</NavigationContainer>
 			</PersistGate>
 		</Provider>

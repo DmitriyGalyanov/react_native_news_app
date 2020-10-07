@@ -15,7 +15,7 @@ import themeColors from 'theme/colors';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function BottomNavTab() {
+export default function MainRouteBottomNavTab() {
 	const [localization, setLocalization] = useState({});
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;

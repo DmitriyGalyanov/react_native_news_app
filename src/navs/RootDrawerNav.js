@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import BottomNavTab from 'navs/BottomNavTab';
+import MainRouteBottomNavTab from 'screens/MainRouteBottomNavTab';
 
 import MainDrawerContent from 'components/MainDrawerContent';
 
@@ -18,7 +18,7 @@ import mainDrawerContentOptions from 'theme/mainDrawerContentOptions';
 
 const Drawer = createDrawerNavigator();
 
-export default function MainDrawerNav() {
+export default function RootDrawerNav() {
 	const [localization, setLocalization] = useState({});
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
@@ -38,7 +38,7 @@ export default function MainDrawerNav() {
 			drawerContentOptions={mainDrawerContentOptions}
 			drawerContent={(props) => <MainDrawerContent {...props} />}
 		>
-			<Drawer.Screen name="MainScreen" component={BottomNavTab}
+			<Drawer.Screen name="MainScreen" component={MainRouteBottomNavTab}
 				options={{
 					title: mainScreenTitle
 				}}
