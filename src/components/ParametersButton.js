@@ -7,13 +7,12 @@ import themeColors from 'theme/colors';
 
 export default function ParametersButton(props) {
 
-	const {title,
-		parameterType, value,
+	const {title, value,
+		buttonsStyle: buttonStyle,
 		onPress: handlePress,
 		disabled, chosen} = props;
 
-	let wrapStyles = [styles.wrap];
-	// if (chosen) wrapStyles.push(styles.chosen);
+	const wrapStyles = [styles.wrap, buttonStyle];
 
 	return (
 		<View style={wrapStyles}>
@@ -30,7 +29,5 @@ export default function ParametersButton(props) {
 const styles = StyleSheet.create({
 	wrap: {
 		minWidth: 130
-	},
-	chosen: {
 	},
 });

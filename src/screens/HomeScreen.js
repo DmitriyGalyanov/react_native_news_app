@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {View, Dimensions, StyleSheet} from 'react-native';
 
@@ -10,21 +10,38 @@ import HomeMainScreen from './home/HomeMainScreen';
 
 import NewsPieceWebView from 'components/NewsPieceWebView';
 
-import themeColors from 'theme/colors';
+import {useSelector} from 'react-redux';
+import {selectLanguageData} from 'state_slices/languageSlice';
+
+// import themeColors from 'theme/colors';
+
+import topBarStyleOptions from 'theme/topBarStyleOptions';
 
 
 const HomeScreenStack = createStackNavigator();
 
 export default function HomeScreen() {
+	const [localization, setLocalization] = useState({});
+
+	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
+
+	useEffect(() => {
+		import(`localization`)
+		.then(data => {
+			setLocalization(data[interfaceLanguage].screensTitles);
+		});
+	}, [interfaceLanguage]);
+
+	const {homeScreenTitle,
+		newsPieceWebViewScreenTitle} = localization;
+
 	return (
-		<HomeScreenStack.Navigator initialRouteName="HomeMainScreen">
+		<HomeScreenStack.Navigator initialRouteName="HomeMainScreen"
+			screenOptions={topBarStyleOptions}
+		>
 			<HomeScreenStack.Screen name="HomeMainScreen" component={HomeMainScreen}
 				options={{
-					title: 'Home',
-					headerStyle: {
-						backgroundColor: themeColors.main
-					},
-					headerTintColor: themeColors.accent,
+					title: homeScreenTitle,
 					headerRight: () => {
 						return (
 							<View style={styles.searchBar}>
@@ -36,11 +53,8 @@ export default function HomeScreen() {
 			/>
 			<HomeScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
 				options={{
-					title: 'News Web View (HOME)',
-					headerStyle: {
-						backgroundColor: themeColors.main
-					},
-					headerTintColor: themeColors.accent
+					title: `${newsPieceWebViewScreenTitle}`,
+					//NewsPiece title (truncated if needed) ?
 				}}
 			/>
 		</HomeScreenStack.Navigator>

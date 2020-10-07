@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -6,30 +6,42 @@ import BookmarksMainScreen from './bookmarks/BookmarksMainScreen';
 
 import NewsPieceWebView from 'components/NewsPieceWebView';
 
-import themeColors from 'theme/colors';
+import {useSelector} from 'react-redux';
+import {selectLanguageData} from 'state_slices/languageSlice';
+
+// import themeColors from 'theme/colors';
+
+import topBarStyleOptions from 'theme/topBarStyleOptions';
 
 
 export const BookmarksScreenStack = createStackNavigator();
 
 export default function BookmarksScreen() {
+	const [localization, setLocalization] = useState({});
+
+	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
+
+	useEffect(() => {
+		import(`localization`)
+		.then(data => {
+			setLocalization(data[interfaceLanguage].screensTitles);
+		});
+	}, [interfaceLanguage]);
+
+	const {bookmarksScreenTitle} = localization;
+
 	return (
-		<BookmarksScreenStack.Navigator initialRouteName="BookmarksMainScreen">
+		<BookmarksScreenStack.Navigator initialRouteName="BookmarksMainScreen"
+			screenOptions={topBarStyleOptions}
+		>
 			<BookmarksScreenStack.Screen name="BookmarksMainScreen" component={BookmarksMainScreen}
 				options={{
-					title: 'Bookmarks',
-					headerStyle: {
-						backgroundColor: themeColors.main
-					},
-					headerTintColor: themeColors.accent
+					title: bookmarksScreenTitle,
 				}}
 			/>
 			<BookmarksScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
 				options={{
 					title: 'News Web View (BOOKMARKS)',
-					headerStyle: {
-						backgroundColor: themeColors.main
-					},
-					headerTintColor: themeColors.accent
 				}}
 			/>
 		</BookmarksScreenStack.Navigator>

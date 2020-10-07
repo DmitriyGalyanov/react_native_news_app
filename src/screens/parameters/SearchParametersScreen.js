@@ -1,15 +1,86 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {View} from 'react-native';
 
-import ButtonsGroup from 'components/ButtonsGroup';
+// import ButtonsGroup from 'components/ButtonsGroup';
+import ParametersButtonsGroup from 'components/ParametersButtonsGroup';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {selectLanguageData} from 'state_slices/languageSlice';
+
 import {
-	selectSearchParametersData} from 'state_slices/searchParametersSlice';
+	selectSearchParametersData,
+	changeEndpoint,
+	changeCountry,
+	changeCategory,
+	changeLanguage,
+	changeSortBy} from 'state_slices/searchParametersSlice';
 
 
 export default function SearchParametersScreen() {
+	const dispatch = useDispatch();
+
+	const [localization, setLocalization] = useState({
+		parametersTitles: {},
+		buttonsTitles: {
+			endpointButtonsTitles: {},
+			categoryButtonsTitles: {},
+			countryButtonsTitles: {},
+			languageButtonsTitles: {},
+			sortByButtonsTitles: {}
+		}
+	});
+
+	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
+
+	useEffect(() => {
+		import(`localization`)
+		.then(data => {
+			setLocalization(data[interfaceLanguage]);
+		});
+	}, [interfaceLanguage]);
+
+	const {endpointTitle,
+		countryTitle,
+		categoryTitle,
+		newsLanguageTitle,
+		sortByTitle} = localization.parametersTitles;
+
+	const {endpointButtonsTitles,
+		categoryButtonsTitles,
+		countryButtonsTitles,
+		languageButtonsTitles,
+		sortByButtonsTitles} = localization.buttonsTitles;
+
+	const {topHeadlines,
+		everything} = endpointButtonsTitles;
+
+	const {business,
+		entertainment,
+		general,
+		health,
+		science,
+		sports,
+		technology,
+		any: anyCategory} = categoryButtonsTitles;
+
+	const {
+		usa,
+		russia,
+		uae,
+		belgium,
+		czechRepublic,
+		france,
+		southKorea,
+		any: anyCountry} = countryButtonsTitles;
+
+	const {english,
+		russian} = languageButtonsTitles;
+
+	const {relevancy,
+	popularity,
+	publishedAt} = sortByButtonsTitles;
+
 	const searchParametersData = useSelector(selectSearchParametersData).entries;
 	const {endpoint,
 		country,
@@ -18,152 +89,172 @@ export default function SearchParametersScreen() {
 		sortBy
 	} = searchParametersData;
 
-
 	const endpointButtons = [
 		{
-			title: 'Top headlines',
+			title: topHeadlines ?? '',
 			value: 'top-headlines'
 		},
 		{
-			title: 'Everything',
+			title: everything ?? '',
 			value: 'everything'
 		}
 	];
 	const categoryButtons = [
 		{
-			title: 'Business',
+			title: business ?? '',
 			value: 'business'
 		},
 		{
-			title: 'Entertainment',
+			title: entertainment ?? '',
 			value: 'entertainment'
 		},
 		{
-			title: 'General',
+			title: general ?? '',
 			value: 'general'
 		},
 		{
-			title: 'Health',
+			title: health ?? '',
 			value: 'health'
 		},
 		{
-			title: 'Science',
+			title: science ?? '',
 			value: 'science'
 		},
 		{
-			title: 'Sports',
+			title: sports ?? '',
 			value: 'sports'
 		},
 		{
-			title: 'Technology',
+			title: technology ?? '',
 			value: 'technology'
 		},
 		{
-			title: 'Any',
+			title: anyCategory ?? '',
 			value: ''
 		}
 	];
 	const countryButtons = [
 		{
-			title: 'USA',
+			title: usa ?? '',
 			value: 'us'
 		},
 		{
-			title: 'Russia',
+			title: russia ?? '',
 			value: 'ru'
 		},
 		{
-			title: 'UAE',
+			title: uae ?? '',
 			value: 'ae'
 		},
 		{
-			title: 'Belgium',
+			title: belgium ?? '',
 			value: 'be'
 		},
 		{
-			title: 'Czech Republic', //shorten?
+			title: czechRepublic ?? '',
 			value: 'cz'
 		},
 		{
-			title: 'France',
+			title: france ?? '',
 			value: 'fr'
 		},
 		{
-			title: 'South Korea',
+			title: southKorea ?? '',
 			value: 'kr'
 		},
 		{
-			title: 'Any',
+			title: anyCountry ?? '',
 			value: ''
 		},
 	];
 	const languageButtons = [
 		{
-			title: 'English',
+			title: english ?? '',
 			value: 'en'
 		},
 		{
-			title: 'Russian',
+			title: russian ?? '',
 			value: 'ru'
 		}
 	];
 	const sortByButtons = [
 		{
-			title: 'Relevancy',
+			title: relevancy ?? '',
 			value: 'relevancy'
 		},
 		{
-			title: 'Popularity',
+			title: popularity ?? '',
 			value: 'popularity'
 		},
 		{
-			title: 'Published at',
+			title: publishedAt ?? '',
 			value: 'publishedAt'
 		},
 	];
 
+	const applicableOnlyWithTopHeadlines = () => {
+		switch(interfaceLanguage) {
+			case 'ru': {
+				return 'можно выбрать только с разделом "Главное"'
+			};
+			case 'en': {
+				return 'is only applicable with Top Headlines endpoint'
+			};
+		}
+	};
+	const applicableOnlyWithEverything = () => {
+		switch(interfaceLanguage) {
+			case 'ru': {
+				return 'можно выбрать только с разделом "Всё"'
+			};
+			case 'en': {
+				return 'is only applicable with Everything endpoint'
+			};
+		}
+	};
+
 	return (
 		<View>
-			<ButtonsGroup row
-				header='Endpoint'
-				parameterType='endpoint'
+			<ParametersButtonsGroup row
+				header={endpointTitle}
 				parameterValue={endpoint}
 				buttonsData={endpointButtons}
+				onPress={(value) => dispatch(changeEndpoint(value))}
 			/>
 			<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-				<ButtonsGroup
-					header='Country'
-					parameterType='country'
+				<ParametersButtonsGroup
+					header={countryTitle}
 					parameterValue={country}
 					buttonsData={countryButtons}
+					onPress={(value) => dispatch(changeCountry(value))}
 					disabled={endpoint === 'everything'}
-					disabledNote='only applicable with Top Headlines endpoint'
+					disabledNote={applicableOnlyWithTopHeadlines()}
 				/>
-				<ButtonsGroup
-					header='Category'
-					parameterType='category'
+				<ParametersButtonsGroup
+					header={categoryTitle}
 					parameterValue={category}
 					buttonsData={categoryButtons}
+					onPress={(value) => dispatch(changeCategory(value))}
 					disabled={endpoint === 'everything'}
-					disabledNote='only applicable with Top Headlines endpoint'
+					disabledNote={applicableOnlyWithTopHeadlines()}
 				/>
 			</View>
 			<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-				<ButtonsGroup
-					header='News Language'
-					parameterType='language'
+				<ParametersButtonsGroup
+					header={newsLanguageTitle}
 					parameterValue={language}
 					buttonsData={languageButtons}
+					onPress={(value) => dispatch(changeLanguage(value))}
 					disabled={endpoint === 'top-headlines'}
-					disabledNote='only applicable with Everything endpoint'
+					disabledNote={applicableOnlyWithEverything()}
 				/>
-				<ButtonsGroup
-					header='Sort by'
-					parameterType='sortBy'
+				<ParametersButtonsGroup
+					header={sortByTitle}
 					parameterValue={sortBy}
 					buttonsData={sortByButtons}
+					onPress={(value) => dispatch(changeSortBy(value))}
 					disabled={endpoint === 'top-headlines'}
-					disabledNote='only applicable with Everything endpoint'
+					disabledNote={applicableOnlyWithEverything()}
 				/>
 			</View>
 			{/*large search bar*/}

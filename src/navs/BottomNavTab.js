@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -7,12 +7,29 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import HomeScreen from 'screens/HomeScreen';
 import BookmarksScreen from 'screens/BookmarksScreen';
 
+import {useSelector} from 'react-redux';
+import {selectLanguageData} from 'state_slices/languageSlice';
+
 import themeColors from 'theme/colors';
 
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomNavTab() {
+	const [localization, setLocalization] = useState({});
+
+	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
+
+	useEffect(() => {
+		import(`localization`)
+		.then(data => {
+			setLocalization(data[interfaceLanguage].screensTitles);
+		});
+	}, [interfaceLanguage]);
+
+	const {homeScreenTitle,
+		bookmarksScreenTitle} = localization;
+
 	return (
 		<Tab.Navigator initialRouteName="HomeScreen"
 			activeColor={themeColors.accent}
@@ -21,7 +38,7 @@ export default function BottomNavTab() {
 		>
 			<Tab.Screen name="HomeScreen" component={HomeScreen}
 				options={{
-					title: 'Home',
+					title: homeScreenTitle,
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name="home" color={color} size={26} />
 					)
@@ -29,8 +46,7 @@ export default function BottomNavTab() {
 			/>
 			<Tab.Screen name="BookmarksScreen" component={BookmarksScreen}
 				options={{
-					title: 'Bookmarks',
-					
+					title: bookmarksScreenTitle,
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name="bookmark-multiple" color={color} size={26} />
 					)

@@ -7,6 +7,9 @@ import NewsPiece from 'components/NewsPiece';
 import {useSelector} from 'react-redux';
 import {selectBookmarksData} from 'state_slices/bookmarksSlice';
 
+import {selectLanguageData} from 'state_slices/languageSlice';
+
+
 export default function BookmarksList() {
 	const parentTabName = 'BookmarksScreen',
 				parentStackName = 'BookmarksMainScreen';
@@ -16,29 +19,6 @@ export default function BookmarksList() {
 
 	const isListLoading = false;
 	const [isError, setIsError] = useState(false);
-
-	// const getMoreData = (isRefreshing = false) => {
-	// 	const offset = isRefreshing ? 0 : list.length;
-	// 	const page = Math.ceil(offset / limit) + 1;
-
-	// 	fetch(`${apiUrl}&page=${page}`)
-	// 		.then(response => response.json())
-	// 		.then(json => {
-	// 			setList(isRefreshing
-	// 				? json.articles
-	// 				: list.concat(json.articles))
-	// 		})
-	// 		.catch(error => setIsError(true)) //handle it somehow later
-	// };
-
-	// const onRefresh = () => {
-	// 	// getMoreData(true);
-	// 	console.log(bookmarksData);
-	// };
-
-	// const onScrollToEnd = () => {
-	// 	getMoreData(false);
-	// };
 
 	const renderItem = (item) => {
 		return (
@@ -50,6 +30,19 @@ export default function BookmarksList() {
 		)
 	};
 
+	const [localization, setLocalization] = useState({});
+
+	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
+
+	useEffect(() => {
+		import(`localization`)
+		.then(data => {
+			setLocalization(data[interfaceLanguage].alerts);
+		});
+	}, [interfaceLanguage]);
+
+	const {noBookmarks} = localization;
+
 	if (isError) {
 		return (
 			//here should be placed an error placeholder component
@@ -59,7 +52,7 @@ export default function BookmarksList() {
 	};
 	if (list.length === 0) {
 		return (
-			<Text>No bookmarks yet!</Text>
+			<Text>{noBookmarks}</Text>
 		)
 	}
 	return (

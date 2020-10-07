@@ -3,51 +3,24 @@ import React from 'react';
 import {View, Text,
 	StyleSheet} from 'react-native';
 
-import {useDispatch} from 'react-redux';
-import {changeEndpoint,
-	changeCountry,
-	changeCategory,
-	changeLanguage,
-	changeSortBy} from 'state_slices/searchParametersSlice';
-
 import ParametersButton from 'components/ParametersButton';
 
 
-export default function ButtonsGroup(props) {
-	const dispatch = useDispatch();
+export default function ParametersButtonsGroup(props) {
 
-	const {row, header,
-		parameterType, parameterValue,
+	const {row, wrapStyle,
+		buttonsStyle,
+		header,
+		parameterValue,
+		buttonsData,
+		onPress: handlePress,
 		disabled, disabledNote,
-		buttonsData} = props;
+		} = props;
 
-	const handlePress = (value) => { //questionable solution
-		switch(parameterType) {
-			case 'endpoint': {
-				dispatch(changeEndpoint(value));
-				break;
-			};
-			case 'country': {
-				dispatch(changeCountry(value));
-				break;
-			};
-			case 'category': {
-				dispatch(changeCategory(value));
-				break;
-			}
-			case 'language': {
-				dispatch(changeLanguage(value));
-				break;
-			};
-			case 'sortBy': {
-				dispatch(changeSortBy(value));
-				break;
-			};
-		}
-	};
+	const wrapStyles = [styles.wrap, wrapStyle];
 
 	return (
-		<View style={styles.wrap}>
+		<View style={wrapStyles}>
 			<Text style={[
 					styles.header,
 					{alignSelf: row ? 'flex-start' : 'center'}
@@ -62,7 +35,7 @@ export default function ButtonsGroup(props) {
 				{buttonsData.map((button, index) => {
 					const {title, value} = button;
 					return <ParametersButton key={index}
-						parameterType={parameterType}
+						buttonsStyle={[styles.button, buttonsStyle]}
 						title={title}
 						value={value}
 						onPress={handlePress}
@@ -74,7 +47,7 @@ export default function ButtonsGroup(props) {
 			{disabled && (
 				<View style={styles.disabledNoteWrap}>
 					<Text style={styles.disabledNote}>
-						{`${header} is ${disabledNote}`}
+						{`'${header}' ${disabledNote}`}
 					</Text>
 				</View>
 			)}
@@ -91,6 +64,9 @@ const styles = StyleSheet.create({
 	list: { //give it a border?
 		justifyContent: "space-between",
 		flexWrap: "wrap"
+	},
+	button: {
+		marginTop: 2
 	},
 	disabledNoteWrap: {
 		flexDirection: "row",
