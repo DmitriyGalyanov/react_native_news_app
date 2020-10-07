@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import MainRouteBottomNavTab from 'screens/MainRouteBottomNavTab';
+import ParametersRouteBottomNavTab from 'navs/ParametersRouteBottomNavTab';
 
 import MainDrawerContent from 'components/MainDrawerContent';
 
-import ParametersScreen from 'screens/ParametersScreen';
+// import ParametersScreen from 'screens/ParametersScreen';
+
 
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
@@ -38,13 +40,15 @@ export default function RootDrawerNav() {
 			drawerContentOptions={mainDrawerContentOptions}
 			drawerContent={(props) => <MainDrawerContent {...props} />}
 		>
-			<Drawer.Screen name="MainScreen" component={MainRouteBottomNavTab}
+			<Drawer.Screen name="MainScreen"
+				component={MainRouteBottomNavTab}
 				options={{
 					title: mainScreenTitle
 				}}
 			/>
 			<Drawer.Screen name="ParametersScreen"
-				component={ParametersScreen}
+				// component={ParametersScreen}
+				component={ParametersRouteBottomNavTab}
 				options={{
 					title: parametersScreenTitle
 				}}
