@@ -5,7 +5,8 @@ export default { //all localization info in one Object
 		bookmarksScreenTitle: 'Закладки',
 		mainScreenTitle: 'Главный экран',
 		parametersScreenTitle: 'Параметры',
-		searchParametersMainScreenTitle: 'Параметры поиска'
+		searchParametersMainScreenTitle: 'Параметры поиска',
+		sourcesParametersMainScreenTitle: 'Параметры источников'
 	},
 
 	parametersTitles: {

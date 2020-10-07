@@ -5,7 +5,8 @@ export default { //all localization info in one Object
 		bookmarksScreenTitle: 'Bookmarks',
 		mainScreenTitle: 'Main',
 		parametersScreenTitle: 'Parameters',
-		searchParametersMainScreenTitle: 'Search Parameters'
+		searchParametersMainScreenTitle: 'Search Parameters',
+		sourcesParametersMainScreenTitle: 'Sources Parameters'
 	},
 
 	parametersTitles: {

@@ -5,6 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import SearchParametersScreen from 'screens/SearchParametersScreen';
+import SourcesParametersScreen from 'screens/SourcesParametersScreen';
 
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
@@ -27,7 +28,7 @@ export default function ParametersRouteBottomNavTab() {
 	}, [interfaceLanguage]);
 
 	const {searchParametersMainScreenTitle,
-		} = localization;
+		sourcesParametersMainScreenTitle} = localization;
 
 	return (
 		<Tab.Navigator initialRouteName="SearchParametersScreen"
@@ -41,6 +42,17 @@ export default function ParametersRouteBottomNavTab() {
 					title: searchParametersMainScreenTitle,
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name="magnify"
+							color={color} size={26}
+						/>
+					)
+				}}
+			/>
+			<Tab.Screen name="SourcesParametersScreen"
+				component={SourcesParametersScreen}
+				options={{
+					title: sourcesParametersMainScreenTitle,
+					tabBarIcon: ({ color }) => (
+						<MaterialCommunityIcons name="source-branch"
 							color={color} size={26}
 						/>
 					)

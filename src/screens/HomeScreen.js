@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import SearchBar from 'components/SearchBar';
 
-import HomeMainScreen from './home/HomeMainScreen';
+import HomeMainScreen from 'screens/home/HomeMainScreen';
 
 import NewsPieceWebViewScreen from 'screens/NewsPieceWebViewScreen';
 
