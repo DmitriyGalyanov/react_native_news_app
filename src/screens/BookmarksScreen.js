@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BookmarksMainScreen from './bookmarks/BookmarksMainScreen';
 
-import NewsPieceWebView from 'components/NewsPieceWebView';
+import NewsPieceWebViewScreen from 'screens/NewsPieceWebViewScreen';
 
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
@@ -40,7 +40,7 @@ export default function BookmarksScreen() {
 					title: bookmarksScreenTitle,
 				}}
 			/>
-			<BookmarksScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
+			<BookmarksScreenStack.Screen name="NewsPieceWebViewScreen" component={NewsPieceWebViewScreen}
 				options={{
 					title: 'News Web View (BOOKMARKS)',
 				}}

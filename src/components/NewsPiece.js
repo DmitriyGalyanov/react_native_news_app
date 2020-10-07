@@ -57,7 +57,7 @@ export default function NewsPiece(props) {
 			: '0' + publishedAtObj.getMinutes());
 
 	const openWebView = () => {
-		navigation.navigate('NewsPieceWebView', {
+		navigation.navigate('NewsPieceWebViewScreen', {
 			uri: url,
 			parentTabName: parentTabName,
 			parentStackName: parentStackName

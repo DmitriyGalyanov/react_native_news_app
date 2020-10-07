@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {Button, Linking} from 'react-native'
+import {Linking} from 'react-native'
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 
-import { WebView } from 'react-native-webview';
+import {WebView} from 'react-native-webview';
 
-export default function NewsPieceWebView(props) {
+export default function NewsPieceWebViewScreen(props) {
 	const navigation = useNavigation();
 
 	const {uri,
@@ -33,16 +33,13 @@ export default function NewsPieceWebView(props) {
 	}
 
 	return (
-		<>
-		{/* <Button title="Go back" onPress={() => navigation.goBack()} /> */}
-			<WebView
-				source={{
-				uri: uri
-				}}
-				onError={() => {
-						handleError();
-				}}
-			/>
-		</>
+		<WebView
+			source={{
+			uri: uri
+			}}
+			onError={() => {
+					handleError();
+			}}
+		/>
 	)
 }

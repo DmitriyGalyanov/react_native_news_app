@@ -8,7 +8,7 @@ import SearchBar from 'components/SearchBar';
 
 import HomeMainScreen from './home/HomeMainScreen';
 
-import NewsPieceWebView from 'components/NewsPieceWebView';
+import NewsPieceWebViewScreen from 'screens/NewsPieceWebViewScreen';
 
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
@@ -53,7 +53,7 @@ export default function HomeScreen() {
 					}
 				}}
 			/>
-			<HomeScreenStack.Screen name="NewsPieceWebView" component={NewsPieceWebView}
+			<HomeScreenStack.Screen name="NewsPieceWebViewScreen" component={NewsPieceWebViewScreen}
 				options={{
 					title: `${newsPieceWebViewScreenTitle}`,
 				}}
