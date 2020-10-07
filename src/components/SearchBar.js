@@ -11,16 +11,19 @@ import {editSearchQuery,
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import animations,
-	{changeWidthAnim,
+	{changeValueAnim,
 	fadeInAnim, fadeOutAnim} from 'theme/animations';
 
 import themeColors from 'theme/colors';
 
+const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+
+const AnimatedIcon = Animated.createAnimatedComponent(MaterialCommunityIcons);
 
 export default function SearchBar() {
 	const dispatch = useDispatch();
 
-	const initWidth = 0;
+	const initWidth = 26;
 	const openWidth = 240; //mb will be responsive (dimension can help)
 	const {defaultAnimTime: animTime} = animations;
 
@@ -28,16 +31,19 @@ export default function SearchBar() {
 
 	const searchBarWidth = useRef(new Animated.Value(initWidth)).current;
 	const searchBarOpacity = useRef(new Animated.Value(0)).current;
+	const magnifierColor = useRef(new Animated.Value(0)).current;
 
 	const openSearchBar = () => {
 		if(isOpen) return;
 		setIsOpen(true);
-		changeWidthAnim(searchBarWidth, openWidth, animTime);
+		changeValueAnim(magnifierColor, animTime, animTime);
+		changeValueAnim(searchBarWidth, openWidth, animTime);
 		fadeInAnim(searchBarOpacity, animTime);
 	};
 	const closeSearchBar = () => {
 		if (!isOpen) return;
-		changeWidthAnim(searchBarWidth, initWidth, animTime);
+		changeValueAnim(magnifierColor, 0, animTime);
+		changeValueAnim(searchBarWidth, initWidth, animTime);
 		fadeOutAnim(searchBarOpacity, animTime);
 		setIsOpen(false);
 	};
@@ -62,29 +68,32 @@ export default function SearchBar() {
 
 	return (
 		<View style={styles.container}>
-			<Animated.View
-				style={[
-					styles.searchBarWrap,
-					{
-						width: searchBarWidth,
-						opacity: searchBarOpacity
-					}
-				]}
-			>
-				<TextInput style={styles.searchBarInput}
+				<AnimatedTextInput
+					style={[
+						styles.searchBarInput,
+						{
+							width: searchBarWidth,
+							opacity: searchBarOpacity
+						}
+					]}
 					placeholder='search'
 					value={value}
 					onChangeText={text => setValue(text)}
 					onSubmitEditing={() => handleEnterPress()}
 				/>
-			</Animated.View>
-			
-			<Animated.View style={styles.magnifierIcon}>
-				<MaterialCommunityIcons name='magnify'
-					size={26} color={themeColors.secondary}
+				<AnimatedIcon name='magnify'
+					size={26}
+					style={[
+						styles.magnifierIcon,
+						{
+							color: magnifierColor.interpolate({
+								inputRange: [0, animTime],
+								outputRange: [themeColors.accent, themeColors.secondary]
+							})
+						}
+					]}
 					onPress={handleMagnifierClick}
 				/>
-			</Animated.View>
 		</View>
 	)
 }
@@ -95,17 +104,14 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	magnifierIcon: {
-		// why does it autocenter after bar expand??
 		position: "absolute",
 		right: 4,
 		top: 3
 	},
-	searchBarWrap: {
-		backgroundColor: 'white',
+	searchBarInput: {
+		backgroundColor: themeColors.accent,
 		borderRadius: 10,
 		height: 34,
-	},
-	searchBarInput: {
 		paddingTop: 8,
 		paddingBottom: 8,
 		paddingLeft: 10,

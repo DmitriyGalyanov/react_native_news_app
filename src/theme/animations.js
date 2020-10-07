@@ -4,7 +4,7 @@ export default {
 	defaultAnimTime: 2000
 }
 
-export function changeWidthAnim(target, toValue, duration) {
+export function changeValueAnim(target, toValue, duration) {
 	Animated.timing(target, {
 		toValue: toValue,
 		duration: duration,
