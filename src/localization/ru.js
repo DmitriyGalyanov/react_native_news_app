@@ -61,5 +61,6 @@ export default { //all localization info in one Object
 
 	alerts: {
 		noBookmarks: 'Закладок пока нет',
+		emptySearchQuery: 'нельзя выбрать без поискового запроса'
 	}
 }

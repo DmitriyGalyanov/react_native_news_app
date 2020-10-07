@@ -5,8 +5,8 @@ export const searchParametersSlice = createSlice({
 	initialState: {
 		entries: {
 			endpoint: 'everything',
-			searchQuery: 'Trump',
-			country: 'us',
+			searchQuery: '',
+			country: '',
 			category: '',
 			language: 'en',
 			sortBy: 'relevancy',
@@ -15,7 +15,11 @@ export const searchParametersSlice = createSlice({
 	reducers: {
 		editSearchQuery: (state, action) => {
 			const query = action.payload;
-			if (!query) state.entries.endpoint = 'top-headlines';
+			if (!query) {
+				state.entries.endpoint = 'everything';
+				state.entries.country = '';
+				state.entries.category = '';
+			}
 			state.entries.searchQuery = query;
 		},
 

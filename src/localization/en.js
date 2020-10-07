@@ -60,6 +60,7 @@ export default { //all localization info in one Object
 	},
 
 	alerts: {
-		noBookmarks: 'No bookmarks yet'
+		noBookmarks: 'No bookmarks yet',
+		emptySearchQuery: 'Can\'t be chosen with empty Search Query'
 	}
 }

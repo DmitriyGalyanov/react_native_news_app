@@ -77,9 +77,6 @@ export default function HomeScreenNewsList() {
 		};
 	};
 
-	
-	console.log(apiUrl(), 'url log');
-
 	useEffect(() => {
 		onRefresh();
 	}, [searchParametersData]); //[apiUrl]

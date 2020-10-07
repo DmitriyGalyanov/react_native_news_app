@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 
 import {View, ScrollView} from 'react-native';
 
-// import ButtonsGroup from 'components/ButtonsGroup';
+import EndpointButtonsGroup from 'components/EndpointButtonsGroup';
 import ParametersButtonsGroup from 'components/ParametersButtonsGroup';
+
 
 import {useSelector, useDispatch} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
@@ -215,7 +216,7 @@ export default function SearchParametersScreen() {
 
 	return (
 		<ScrollView>
-			<ParametersButtonsGroup row
+			<EndpointButtonsGroup
 				header={endpointTitle}
 				parameterValue={endpoint}
 				buttonsData={endpointButtons}
@@ -257,7 +258,6 @@ export default function SearchParametersScreen() {
 					disabledNote={applicableOnlyWithEverything()}
 				/>
 			</View>
-			{/*large search bar*/}
 		</ScrollView>
 	)
 }
