@@ -38,13 +38,47 @@ export default function HomeScreenNewsList() {
 		`&sortBy=${sortBy}`
 	;
 
+	const sources = [
+		'abc-news',
+		'ars-technica',
+		'associated-press',
+		'axios',
+		'bbc-news',
+
+		'bloomberg',
+		'breitbart-news',
+		'business-insider',
+		'buzzfeed',
+		'cbc-news',
+
+		'cbs-news',
+		'cnn',
+		'entertainment-weekly',
+		'financial-post',
+		'fortune',
+
+		'fox-news',
+		'google-news',
+		'hacker-news',
+		'ign',
+		'independent'
+	];
+
 	const apiUrl = () => {
+		let sourcesParameter = '&sources=';
+		if(!searchQuery) {
+			sourcesParameter += sources.join(',');
+		}
+
 		switch(endpoint) {
-			case 'top-headlines': return topHeadlinesUrl;
-			case 'everything': return everythingUrl;
-			default: return topHeadlinesUrl;
+			case 'top-headlines': return topHeadlinesUrl + sourcesParameter;
+			case 'everything': return everythingUrl + sourcesParameter;
+			default: return topHeadlinesUrl + sourcesParameter;
 		};
 	};
+
+	
+	console.log(apiUrl(), 'url log');
 
 	useEffect(() => {
 		onRefresh();
