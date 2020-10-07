@@ -4,11 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-import ParametersScreen from 'screens/ParametersScreen';
-//searchParametersScreen
-
-// import HomeScreen from 'screens/HomeScreen';
-// import BookmarksScreen from 'screens/BookmarksScreen';
+import SearchParametersScreen from 'screens/SearchParametersScreen';
 
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
@@ -30,7 +26,7 @@ export default function ParametersRouteBottomNavTab() {
 		});
 	}, [interfaceLanguage]);
 
-	const {searchParametersScreenTitle,
+	const {searchParametersMainScreenTitle,
 		} = localization;
 
 	return (
@@ -39,9 +35,10 @@ export default function ParametersRouteBottomNavTab() {
 			inactiveColor="gray"
 			barStyle={{ backgroundColor: themeColors.main }}
 		>
-			<Tab.Screen name="SearchParametersScreen" component={ParametersScreen}
+			<Tab.Screen name="SearchParametersScreen"
+				component={SearchParametersScreen}
 				options={{
-					title: searchParametersScreenTitle,
+					title: searchParametersMainScreenTitle,
 					tabBarIcon: ({ color }) => (
 						<MaterialCommunityIcons name="magnify"
 							color={color} size={26}
@@ -49,14 +46,6 @@ export default function ParametersRouteBottomNavTab() {
 					)
 				}}
 			/>
-			{/* <Tab.Screen name="BookmarksScreen" component={BookmarksScreen}
-				options={{
-					title: bookmarksScreenTitle,
-					tabBarIcon: ({ color }) => (
-						<MaterialCommunityIcons name="bookmark-multiple" color={color} size={26} />
-					)
-				}}
-			/> */}
 		</Tab.Navigator>
 	)
 }

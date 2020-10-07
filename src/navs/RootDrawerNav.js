@@ -7,9 +7,6 @@ import ParametersRouteBottomNavTab from 'navs/ParametersRouteBottomNavTab';
 
 import MainDrawerContent from 'components/MainDrawerContent';
 
-// import ParametersScreen from 'screens/ParametersScreen';
-
-
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
@@ -47,7 +44,6 @@ export default function RootDrawerNav() {
 				}}
 			/>
 			<Drawer.Screen name="ParametersScreen"
-				// component={ParametersScreen}
 				component={ParametersRouteBottomNavTab}
 				options={{
 					title: parametersScreenTitle

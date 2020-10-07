@@ -18,7 +18,7 @@ import {
 	changeSortBy} from 'state_slices/searchParametersSlice';
 
 
-export default function SearchParametersScreen() {
+export default function SearchParametersMainScreen() {
 	const dispatch = useDispatch();
 
 	const [localization, setLocalization] = useState({
