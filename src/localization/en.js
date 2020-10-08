@@ -16,7 +16,9 @@ export default { //all localization info in one Object
 		newsLanguageTitle: 'News Language',
 		sortByTitle: 'Sort By',
 
-		interfaceLanguageTitle: 'Interface Lang'
+		interfaceLanguageTitle: 'Interface Lang',
+
+		sourcesTitle: 'Sources List'
 	},
 
 	buttonsTitles: {
@@ -62,6 +64,8 @@ export default { //all localization info in one Object
 
 	alerts: {
 		noBookmarks: 'No bookmarks yet',
-		emptySearchQuery: 'Can\'t be chosen with empty Search Query'
+		emptySearchQuery: 'Can\'t be chosen with empty Search Query',
+		onlyApplicableWithEverythingEndpoint: 'is only applicable with \'Everything\' endpoint',
+		onlyApplicableWithTopHeadlinesEndpoint: 'is only applicable with \'Top Headlines\' endpoint'
 	}
 }

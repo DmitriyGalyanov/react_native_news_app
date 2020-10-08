@@ -10,6 +10,29 @@ export const searchParametersSlice = createSlice({
 			category: '',
 			language: 'en',
 			sortBy: 'relevancy',
+
+			sources: {
+				'abc-news': {
+					title: 'ABC News',
+					id: 'abc-news', //
+					isChosen: true
+				},
+				'ars-technica': {
+					title: 'ARS Technica',
+					id: 'ars-technica', //
+					isChosen: true
+				},
+				'associated-press': {
+					title: 'Associated Press',
+					id: 'associated-press', //
+					isChosen: true
+				},
+				'axios': {
+					title: 'Axios',
+					id: 'axios', //
+					isChosen: true
+				}
+			}
 		},
 	},
 	reducers: {
@@ -47,6 +70,12 @@ export const searchParametersSlice = createSlice({
 		changeSortBy: (state, action) => {
 			const sortBy = action.payload;
 			state.entries.sortBy = sortBy;
+		},
+
+		toggleSource: (state, action) => {
+			const sourceId = action.payload;
+			state.entries.sources[sourceId].isChosen =
+				!state.entries.sources[sourceId].isChosen;
 		}
 	}
 });
@@ -56,7 +85,8 @@ export const {editSearchQuery,
 	changeCountry,
 	changeCategory,
 	changeLanguage,
-	changeSortBy} = searchParametersSlice.actions;
+	changeSortBy,
+	toggleSource} = searchParametersSlice.actions;
 
 export const selectSearchParametersData = state => state.searchParametersSlice;
 

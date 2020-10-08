@@ -2,13 +2,13 @@ import React from 'react';
 
 import {View} from 'react-native';
 
-import SourcesParametersList from 'components/SourcesParametersList';
+import SourcesButtonsGroup from 'components/SourcesButtonsGroup';
 
 
 export default function SourcesParametersMainScreen() {
 	return (
 		<View>
-			<SourcesParametersList/>
+			<SourcesButtonsGroup/>
 		</View>
 	)
 }

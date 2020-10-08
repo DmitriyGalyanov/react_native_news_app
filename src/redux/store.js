@@ -14,7 +14,7 @@ const persistConfig = {
 	key: 'root',
 	storage: storage,
 	// whiteList: [],
-	// blacklist: []
+	blacklist: ['searchParametersSlice'] //COMMENT AFTER SETUP
 }
 
 const rootReducer = combineReducers({

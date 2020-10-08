@@ -5,7 +5,6 @@ import {View, ScrollView} from 'react-native';
 import EndpointButtonsGroup from 'components/EndpointButtonsGroup';
 import ParametersButtonsGroup from 'components/ParametersButtonsGroup';
 
-
 import {useSelector, useDispatch} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
@@ -29,7 +28,8 @@ export default function SearchParametersMainScreen() {
 			countryButtonsTitles: {},
 			languageButtonsTitles: {},
 			sortByButtonsTitles: {}
-		}
+		},
+		alerts: {}
 	});
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
@@ -193,26 +193,8 @@ export default function SearchParametersMainScreen() {
 		},
 	];
 
-	const applicableOnlyWithTopHeadlines = () => {
-		switch(interfaceLanguage) {
-			case 'ru': {
-				return 'можно выбрать только с разделом "Главное"'
-			};
-			case 'en': {
-				return 'is only applicable with Top Headlines endpoint'
-			};
-		}
-	};
-	const applicableOnlyWithEverything = () => {
-		switch(interfaceLanguage) {
-			case 'ru': {
-				return 'можно выбрать только с разделом "Всё"'
-			};
-			case 'en': {
-				return 'is only applicable with Everything endpoint'
-			};
-		}
-	};
+	const {onlyApplicableWithEverythingEndpoint,
+		onlyApplicableWithTopHeadlinesEndpoint} = localization.alerts;
 
 	return (
 		<ScrollView>
@@ -229,7 +211,7 @@ export default function SearchParametersMainScreen() {
 					buttonsData={countryButtons}
 					onPress={(value) => dispatch(changeCountry(value))}
 					disabled={endpoint === 'everything'}
-					disabledNote={applicableOnlyWithTopHeadlines()}
+					disabledNote={onlyApplicableWithTopHeadlinesEndpoint}
 				/>
 				<ParametersButtonsGroup
 					header={categoryTitle}
@@ -237,7 +219,7 @@ export default function SearchParametersMainScreen() {
 					buttonsData={categoryButtons}
 					onPress={(value) => dispatch(changeCategory(value))}
 					disabled={endpoint === 'everything'}
-					disabledNote={applicableOnlyWithTopHeadlines()}
+					disabledNote={onlyApplicableWithTopHeadlinesEndpoint}
 				/>
 			</View>
 			<View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -247,7 +229,7 @@ export default function SearchParametersMainScreen() {
 					buttonsData={languageButtons}
 					onPress={(value) => dispatch(changeLanguage(value))}
 					disabled={endpoint === 'top-headlines'}
-					disabledNote={applicableOnlyWithEverything()}
+					disabledNote={onlyApplicableWithEverythingEndpoint}
 				/>
 				<ParametersButtonsGroup
 					header={sortByTitle}
@@ -255,7 +237,7 @@ export default function SearchParametersMainScreen() {
 					buttonsData={sortByButtons}
 					onPress={(value) => dispatch(changeSortBy(value))}
 					disabled={endpoint === 'top-headlines'}
-					disabledNote={applicableOnlyWithEverything()}
+					disabledNote={onlyApplicableWithEverythingEndpoint}
 				/>
 			</View>
 		</ScrollView>

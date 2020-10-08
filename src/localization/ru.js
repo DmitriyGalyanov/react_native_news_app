@@ -16,7 +16,9 @@ export default { //all localization info in one Object
 		newsLanguageTitle: 'Язык новостей',
 		sortByTitle: 'Сортировка',
 
-		interfaceLanguageTitle: 'Язык интерфейса'
+		interfaceLanguageTitle: 'Язык интерфейса',
+
+		sourcesTitle: 'Список источников'
 	},
 
 	buttonsTitles: {
@@ -62,6 +64,8 @@ export default { //all localization info in one Object
 
 	alerts: {
 		noBookmarks: 'Закладок пока нет',
-		emptySearchQuery: 'нельзя выбрать без поискового запроса'
+		emptySearchQuery: 'нельзя выбрать без поискового запроса',
+		onlyApplicableWithEverythingEndpoint: 'можно выбрать только с разделом "Всё"', //rename
+		onlyApplicableWithTopHeadlinesEndpoint: 'можно выбрать только с разделом "Главное"'
 	}
 }
