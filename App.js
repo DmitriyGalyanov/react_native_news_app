@@ -20,7 +20,7 @@ import {store,
 	persistor} from 'app_redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 
-import LoadingIndicator from 'components/LoadingIndicator';
+import CenteredAlert from 'components/CenteredAlert';
 
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -32,7 +32,7 @@ const App: () => React$Node = () => {
 
 	return (
 		<Provider store={store}>
-			<PersistGate loading={<LoadingIndicator target='App State'/>}
+			<PersistGate loading={<CenteredAlert target='App State'/>}
 				persistor={persistor}
 			>
 				<NavigationContainer>

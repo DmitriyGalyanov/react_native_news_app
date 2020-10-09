@@ -6,12 +6,12 @@ import {View, Text,
 
 const {width, height} = Dimensions.get('window');
 
-export default function LoadingIndicator(props) {
-	const {target} = props;
+export default function CenteredAlert(props) {
+	const {target, alertText} = props;
 	return (
 		<View style={styles.wrap}>
 			<Text>
-				{target} is loading...
+				{`${target} ${alertText}`}
 			</Text>
 		</View>
 	)
