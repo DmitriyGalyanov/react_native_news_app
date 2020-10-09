@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
-import {View, Text,
+import {ScrollView, View,
+	Text,
 	StyleSheet} from 'react-native';
 
 import {useSelector, useDispatch} from 'react-redux';
@@ -30,17 +31,17 @@ export default function SourcesButtonsGroup(props) {
 
 	const {sourcesTitle} = localization?.parametersTitles;
 
-	const {onlyApplicableWithEverythingEndpoint} = localization?.alerts;
+	const {notApplicableWithCountryOrCategory} = localization?.alerts;
 
 	const sourcesButtonsData = useSelector(selectSearchParametersData)
 		.entries?.sources;
 
-	const endpoint = useSelector(selectSearchParametersData)
-		.entries?.endpoint;
+	const {country, category} = useSelector(selectSearchParametersData)
+		.entries;
 
 	const getIsGroupDisabled = () => {
-		if (endpoint === 'everything') return false;
-		return true;
+		if (country || category) return true;
+		return false;
 	};
 	const isGroupDisabled = getIsGroupDisabled();
 
@@ -53,7 +54,7 @@ export default function SourcesButtonsGroup(props) {
 	};
 
 	return (
-		<View style={wrapStyles}>
+		<ScrollView style={wrapStyles}>
 			<Text style={styles.header}>
 				{sourcesTitle}
 			</Text>
@@ -73,11 +74,11 @@ export default function SourcesButtonsGroup(props) {
 			{isGroupDisabled && (
 				<View style={styles.disabledNoteWrap}>
 					<Text style={styles.disabledNote}>
-						{`'${sourcesTitle}' ${onlyApplicableWithEverythingEndpoint}`}
+						{`'${sourcesTitle}' ${notApplicableWithCountryOrCategory}`}
 					</Text>
 				</View>
 			)}
-		</View>
+		</ScrollView>
 	)
 }
 

@@ -66,6 +66,7 @@ export default { //all localization info in one Object
 		noBookmarks: 'No bookmarks yet',
 		emptySearchQuery: 'Can\'t be chosen with empty Search Query',
 		onlyApplicableWithEverythingEndpoint: 'is only applicable with \'Everything\' endpoint',
-		onlyApplicableWithTopHeadlinesEndpoint: 'is only applicable with \'Top Headlines\' endpoint'
+		onlyApplicableWithTopHeadlinesEndpoint: 'is only applicable with \'Top Headlines\' endpoint',
+		notApplicableWithCountryOrCategory: 'can\'t be selected together with country or category',
 	}
 }

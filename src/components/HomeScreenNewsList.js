@@ -22,7 +22,8 @@ export default function HomeScreenNewsList() {
 		country,
 		language,
 		category,
-		sortBy} = searchParametersData;
+		sortBy,
+		sources: sourcesObject} = searchParametersData;
 	
 	const topHeadlinesUrl = apiSrc + 'top-headlines' +
 		`?apiKey=${apiKey}` + `&pageSize=${pageSize}` +
@@ -38,42 +39,21 @@ export default function HomeScreenNewsList() {
 		`&sortBy=${sortBy}`
 	;
 
-	const sources = [
-		'abc-news',
-		'ars-technica',
-		'associated-press',
-		'axios',
-		'bbc-news',
+	const sourcesArray = Object.entries(sourcesObject)
+		.filter(source => source[1].isChosen);
 
-		'bloomberg',
-		'breitbart-news',
-		'business-insider',
-		'buzzfeed',
-		'cbc-news',
-
-		'cbs-news',
-		'cnn',
-		'entertainment-weekly',
-		'financial-post',
-		'fortune',
-
-		'fox-news',
-		'google-news',
-		'hacker-news',
-		'ign',
-		'independent'
-	];
+	const sourcesString = sourcesArray.map(source => source[1].id).join(',');
 
 	const apiUrl = () => {
 		let sourcesParameter = '&sources=';
-		if(!searchQuery) {
-			sourcesParameter += sources.join(',');
-		}
+			if(!category && !country) {
+				sourcesParameter += sourcesString;
+			};
 
 		switch(endpoint) {
 			case 'top-headlines': return topHeadlinesUrl + sourcesParameter;
 			case 'everything': return everythingUrl + sourcesParameter;
-			default: return topHeadlinesUrl + sourcesParameter;
+			default: return everythingUrl + sourcesParameter;
 		};
 	};
 
@@ -119,13 +99,17 @@ export default function HomeScreenNewsList() {
 		)
 	};
 
-	if (isError) {
+	if (list.length === 0) {
 		return (
-			//here should be placed an error placeholder component
-			<Text>Something went wrong... refresh please</Text>
-			//add a refresh button (if is error; there is an opinion that such error status can be stored in Redux too)
+			<Text>No results</Text>
 		)
 	};
+	if (isError) {
+		return (
+			<Text>Something went wrong... refresh please</Text>
+		)
+	};
+
 	return (
 		<View>
 			<FlatList

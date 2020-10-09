@@ -66,6 +66,7 @@ export default { //all localization info in one Object
 		noBookmarks: 'Закладок пока нет',
 		emptySearchQuery: 'нельзя выбрать без поискового запроса',
 		onlyApplicableWithEverythingEndpoint: 'можно выбрать только с разделом "Всё"', //rename
-		onlyApplicableWithTopHeadlinesEndpoint: 'можно выбрать только с разделом "Главное"'
+		onlyApplicableWithTopHeadlinesEndpoint: 'можно выбрать только с разделом "Главное"',
+		notApplicableWithCountryOrCategory: 'нельзя выбрать вместе с страной и/или категорией',
 	}
 }
