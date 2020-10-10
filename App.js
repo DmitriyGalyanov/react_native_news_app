@@ -22,20 +22,20 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import CenteredAlert from 'components/CenteredAlert';
 
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 
 import RootDrawerNav from 'navs/RootDrawerNav';
 
 import {LocalizationProvider} from 'localization/LocalizationContext';
 
 
-const App: () => React$Node = () => {
+export default function App() {
 	Reactotron.log('hello rendering world'); //e.g
 
 	return (
 		<Provider store={store}>
 			<LocalizationProvider>
-				<PersistGate loading={<CenteredAlert target='App State'/>}
+				<PersistGate loading={<CenteredAlert alertText='appstateisloading'/>}
 					persistor={persistor}
 				>
 					<NavigationContainer>
@@ -46,5 +46,3 @@ const App: () => React$Node = () => {
 		</Provider>
 	);
 };
-
-export default App;
