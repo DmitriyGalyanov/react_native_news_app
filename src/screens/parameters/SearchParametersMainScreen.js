@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {View, ScrollView} from 'react-native';
 
@@ -16,30 +16,15 @@ import {
 	changeLanguage,
 	changeSortBy} from 'state_slices/searchParametersSlice';
 
+import {LocalizationContext} from 'localization/LocalizationContext';
+
 
 export default function SearchParametersMainScreen() {
 	const dispatch = useDispatch();
 
-	const [localization, setLocalization] = useState({
-		parametersTitles: {},
-		buttonsTitles: {
-			endpointButtonsTitles: {},
-			categoryButtonsTitles: {},
-			countryButtonsTitles: {},
-			languageButtonsTitles: {},
-			sortByButtonsTitles: {}
-		},
-		alerts: {}
-	});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage]);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage];
 
 	const {endpointTitle,
 		countryTitle,

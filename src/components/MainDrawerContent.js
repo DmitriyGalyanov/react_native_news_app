@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {StyleSheet,
 	TouchableNativeFeedback
@@ -16,26 +16,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
 import {setLanguage} from 'state_slices/languageSlice';
 
+import {LocalizationContext} from 'localization/LocalizationContext';
+
 
 export default function MainDrawerContent(props) {
 	const dispatch = useDispatch();
 	// const ripple = TouchableNativeFeedback.Ripple('#adacac', false);
 
-	const [localization, setLocalization] = useState({
-		parametersTitles: {},
-		buttonsTitles: {
-			interfaceLanguageButtonsTitles: {}
-		}
-	});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage]);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage];
 
 	const {interfaceLanguageTitle} = localization.parametersTitles;
 
@@ -45,11 +35,11 @@ export default function MainDrawerContent(props) {
 
 	const interfaceLanguageButtons = [
 		{
-			title: ru ?? '',
+			title: ru ?? 'Русский',
 			value: 'ru'
 		},
 		{
-			title: en ?? '',
+			title: en ?? 'English',
 			value: 'en'
 		}
 	];

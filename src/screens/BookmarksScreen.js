@@ -10,17 +10,18 @@ import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
 import topBarStyleOptions from 'theme/topBarStyleOptions';
+
 import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 export const BookmarksScreenStack = createStackNavigator();
 
 export default function BookmarksScreen() {
-	const localization = useContext(LocalizationContext);
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	const {bookmarksScreenTitle} = localization
-		?.[interfaceLanguage].screensTitles;
+	const localization = useContext(LocalizationContext)[interfaceLanguage];
+
+	const {bookmarksScreenTitle} = localization?.screensTitles;
 
 	return (
 		<BookmarksScreenStack.Navigator initialRouteName="BookmarksMainScreen"

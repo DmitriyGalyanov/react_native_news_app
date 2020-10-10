@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 
 import {View, FlatList, Text} from 'react-native';
 
@@ -8,6 +8,8 @@ import {useSelector} from 'react-redux';
 import {selectBookmarksData} from 'state_slices/bookmarksSlice';
 
 import {selectLanguageData} from 'state_slices/languageSlice';
+
+import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 export default function BookmarksList() {
@@ -23,23 +25,16 @@ export default function BookmarksList() {
 	const renderItem = (item) => {
 		return (
 			<NewsPiece {...item}
-				// parentScreenName={parentScreenName}
 				parentTabName={parentTabName}
 				parentStackName={parentStackName}
 			/>
 		)
 	};
 
-	const [localization, setLocalization] = useState({});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage].alerts);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.alerts;
 
 	const {noBookmarks} = localization;
 
@@ -54,7 +49,7 @@ export default function BookmarksList() {
 		return (
 			<Text>{noBookmarks}</Text>
 		)
-	}
+	};
 	return (
 		<View>
 			<FlatList
@@ -62,8 +57,6 @@ export default function BookmarksList() {
 				renderItem={renderItem}
 				keyExtractor={(item) => item.url}
 				refreshing={isListLoading}
-				// onRefresh={onRefresh}
-				// onEndReached={onScrollToEnd}
 				onEndReachedThreshold={0.05}
 			/>
 		</View>

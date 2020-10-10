@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useContext} from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -9,20 +9,17 @@ import {selectLanguageData} from 'state_slices/languageSlice';
 
 import topBarStyleOptions from 'theme/topBarStyleOptions';
 
+import {LocalizationContext} from 'localization/LocalizationContext';
+
 
 const ParametersScreenStack = createStackNavigator();
 
 export default function SearchParametersScreen() {
-	const [localization, setLocalization] = useState({});
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage].screensTitles);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.screensTitles;
 
 	const {searchParametersMainScreenTitle} = localization;
 

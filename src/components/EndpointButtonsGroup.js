@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {View, Text,
 	StyleSheet} from 'react-native';
@@ -9,21 +9,17 @@ import {selectLanguageData} from 'state_slices/languageSlice';
 
 import ParametersButton from 'components/ParametersButton';
 
+import {LocalizationContext} from 'localization/LocalizationContext';
+
 
 export default function EndpointButtonsGroup(props) {
 	const searchQuery = useSelector(selectSearchParametersData)
 		.entries?.searchQuery;
 
-		const [localization, setLocalization] = useState({});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage].alerts);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.alerts;
 
 	const {emptySearchQuery} = localization;
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {View, Dimensions, StyleSheet} from 'react-native';
 
@@ -13,24 +13,18 @@ import NewsPieceWebViewScreen from 'screens/NewsPieceWebViewScreen';
 import {useSelector} from 'react-redux';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
-// import themeColors from 'theme/colors';
-
 import topBarStyleOptions from 'theme/topBarStyleOptions';
+
+import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 const HomeScreenStack = createStackNavigator();
 
 export default function HomeScreen() {
-	const [localization, setLocalization] = useState({});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage].screensTitles);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.screensTitles;
 
 	const {homeScreenTitle,
 		newsPieceWebViewScreenTitle} = localization;

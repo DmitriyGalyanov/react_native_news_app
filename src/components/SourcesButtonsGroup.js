@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {ScrollView, View,
 	Text,
@@ -7,27 +7,19 @@ import {ScrollView, View,
 import {useSelector, useDispatch} from 'react-redux';
 import {selectSearchParametersData, toggleSource}
 	from 'state_slices/searchParametersSlice';
+import {selectLanguageData} from 'state_slices/languageSlice';
 
 import ParametersButton from 'components/ParametersButton';
-import {selectLanguageData} from 'state_slices/languageSlice';
+
+import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 export default function SourcesButtonsGroup(props) {
 	const dispatch = useDispatch();
 
-	const [localization, setLocalization] = useState({
-		parametersTitles: {},
-		alerts: {}
-	});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage]);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage];
 
 	const {sourcesTitle} = localization?.parametersTitles;
 
