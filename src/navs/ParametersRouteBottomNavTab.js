@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -12,20 +12,16 @@ import {selectLanguageData} from 'state_slices/languageSlice';
 
 import themeColors from 'theme/colors';
 
+import {LocalizationContext} from 'localization/LocalizationContext';
+
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function ParametersRouteBottomNavTab() {
-	const [localization, setLocalization] = useState({});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage].screensTitles);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.screensTitles;
 
 	const {searchParametersMainScreenTitle,
 		sourcesParametersMainScreenTitle} = localization;

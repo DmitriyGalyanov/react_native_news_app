@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useContext} from 'react';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import MainRouteBottomNavTab from 'screens/MainRouteBottomNavTab';
+import MainRouteBottomNavTab from 'navs/MainRouteBottomNavTab';
 import ParametersRouteBottomNavTab from 'navs/ParametersRouteBottomNavTab';
 
 import MainDrawerContent from 'components/MainDrawerContent';
@@ -12,22 +12,16 @@ import {selectLanguageData} from 'state_slices/languageSlice';
 
 import mainDrawerContentOptions from 'theme/mainDrawerContentOptions';
 
-// import themeColors from 'theme/colors';
+import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 const Drawer = createDrawerNavigator();
 
 export default function RootDrawerNav() {
-	const [localization, setLocalization] = useState({});
-
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	useEffect(() => {
-		import(`localization`)
-		.then(data => {
-			setLocalization(data[interfaceLanguage].screensTitles);
-		});
-	}, [interfaceLanguage]);
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.screensTitles;
 
 	const {mainScreenTitle,
 		parametersScreenTitle} = localization;
