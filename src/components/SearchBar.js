@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useContext} from 'react';
 
 import {View, TextInput,
 	Animated, StyleSheet
@@ -8,6 +8,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {editSearchQuery,
 	selectSearchParametersData} from 'state_slices/searchParametersSlice';
 
+import {selectLanguageData} from 'state_slices/languageSlice';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import animations,
@@ -16,12 +18,22 @@ import animations,
 
 import themeColors from 'theme/colors';
 
+import {LocalizationContext} from 'localization/LocalizationContext';
+
+
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const AnimatedIcon = Animated.createAnimatedComponent(MaterialCommunityIcons);
 
 export default function SearchBar() {
 	const dispatch = useDispatch();
+
+	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
+
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.parametersTitles;
+
+	const {searchTitle} = localization;
 
 	const initWidth = 26;
 	const openWidth = 240; //mb will be responsive (dimension can help)
@@ -76,7 +88,7 @@ export default function SearchBar() {
 							opacity: searchBarOpacity
 						}
 					]}
-					placeholder='search'
+					placeholder={searchTitle}
 					value={value}
 					onChangeText={text => setValue(text)}
 					onSubmitEditing={() => handleEnterPress()}

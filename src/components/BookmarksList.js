@@ -3,6 +3,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import {View, FlatList, Text} from 'react-native';
 
 import NewsPiece from 'components/NewsPiece';
+import CenteredAlert from 'components/CenteredAlert';
+
 
 import {useSelector} from 'react-redux';
 import {selectBookmarksData} from 'state_slices/bookmarksSlice';
@@ -40,14 +42,17 @@ export default function BookmarksList() {
 
 	if (isError) {
 		return (
-			//here should be placed an error placeholder component
-			<Text>Something went wrong... refresh please</Text>
+			<CenteredAlert
+				alertText='something went wrong... refresh please'
+			/>
 			//add a refresh button (if is error; there is an opinion that such error status can be stored in Redux too)
 		)
 	};
 	if (list.length === 0) {
 		return (
-			<Text>{noBookmarks}</Text>
+			<CenteredAlert
+				alertText={noBookmarks}
+			/>
 		)
 	};
 	return (

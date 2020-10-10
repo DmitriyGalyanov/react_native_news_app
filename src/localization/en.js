@@ -18,7 +18,9 @@ export default { //all localization info in one Object
 
 		interfaceLanguageTitle: 'Interface Lang',
 
-		sourcesTitle: 'Sources List'
+		sourcesTitle: 'Sources List',
+
+		searchTitle: 'search'
 	},
 
 	buttonsTitles: {
@@ -68,5 +70,6 @@ export default { //all localization info in one Object
 		onlyApplicableWithEverythingEndpoint: 'is only applicable with \'Everything\' endpoint',
 		onlyApplicableWithTopHeadlinesEndpoint: 'is only applicable with \'Top Headlines\' endpoint',
 		notApplicableWithCountryOrCategory: 'can\'t be selected together with country or category',
+		appStateIsLoading: 'App State is loading...',
 	}
 }

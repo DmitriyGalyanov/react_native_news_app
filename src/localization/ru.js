@@ -18,7 +18,9 @@ export default { //all localization info in one Object
 
 		interfaceLanguageTitle: 'Язык интерфейса',
 
-		sourcesTitle: 'Список источников'
+		sourcesTitle: 'Список источников',
+
+		searchTitle: 'поиск'
 	},
 
 	buttonsTitles: {
@@ -68,5 +70,6 @@ export default { //all localization info in one Object
 		onlyApplicableWithEverythingEndpoint: 'можно выбрать только с разделом "Всё"', //rename
 		onlyApplicableWithTopHeadlinesEndpoint: 'можно выбрать только с разделом "Главное"',
 		notApplicableWithCountryOrCategory: 'нельзя выбрать вместе с страной и/или категорией',
+		appStateIsLoading: 'Загружается состояние приложения...',
 	}
 }
