@@ -57,9 +57,11 @@ export default function ParametersButtonsGroup(props) {
 
 const styles = StyleSheet.create({
 	wrap: {
-		paddingHorizontal: 20
+		paddingHorizontal: 20,
+		marginBottom: 4
 	},
 	header: {
+		fontSize: 18
 	},
 	list: { //give it a border?
 		justifyContent: "space-between",
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
 	disabledNote: {
 		flex: 1,
 		flexWrap: "wrap",
-		textAlign: "center"
+		textAlign: "center",
+		fontSize: 15
 	}
 });

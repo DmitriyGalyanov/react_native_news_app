@@ -71,5 +71,7 @@ export default { //all localization info in one Object
 		onlyApplicableWithTopHeadlinesEndpoint: 'is only applicable with \'Top Headlines\' endpoint',
 		notApplicableWithCountryOrCategory: 'can\'t be selected together with country or category',
 		appStateIsLoading: 'App State is loading...',
+		simultaneouslySelectedSourcesAmount: 'One to twenty sources can be selected at the same time',
+		currentlySelected: 'Currently selected:',
 	}
 }

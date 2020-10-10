@@ -22,7 +22,6 @@ export default function BookmarksList() {
 	const {entries: list} = bookmarksData;
 
 	const isListLoading = false;
-	const [isError, setIsError] = useState(false);
 
 	const renderItem = (item) => {
 		return (
@@ -40,14 +39,6 @@ export default function BookmarksList() {
 
 	const {noBookmarks} = localization;
 
-	if (isError) {
-		return (
-			<CenteredAlert
-				alertText='something went wrong... refresh please'
-			/>
-			//add a refresh button (if is error; there is an opinion that such error status can be stored in Redux too)
-		)
-	};
 	if (list.length === 0) {
 		return (
 			<CenteredAlert

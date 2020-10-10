@@ -23,7 +23,9 @@ export default function SourcesButtonsGroup(props) {
 
 	const {sourcesTitle} = localization?.parametersTitles;
 
-	const {notApplicableWithCountryOrCategory} = localization?.alerts;
+	const {notApplicableWithCountryOrCategory,
+		simultaneouslySelectedSourcesAmount,
+		currentlySelected} = localization?.alerts;
 
 	const sourcesButtonsData = useSelector(selectSearchParametersData)
 		.entries?.sources;
@@ -42,8 +44,21 @@ export default function SourcesButtonsGroup(props) {
 	const wrapStyles = [styles.wrap, wrapStyle];
 
 	const handlePress = (value) => {
+		if (chosenSrcList.length === 1
+				&& value === chosenSrcList[0][0]) return;
+
+		if (chosenSrcList.length === 20) {
+			const test = chosenSrcList.filter(src => {
+				return src[0] === value
+			});
+			if (test.length === 0) return;
+		}
 		dispatch(toggleSource(value));
 	};
+
+	const chosenSrcList = Object.entries(sourcesButtonsData).filter(source => {
+		return source[1].isChosen
+	});
 
 	return (
 		<ScrollView style={wrapStyles}>
@@ -70,6 +85,14 @@ export default function SourcesButtonsGroup(props) {
 					</Text>
 				</View>
 			)}
+			<View style={styles.bottomNotes}>
+				<Text style={styles.textStyling}>
+					{simultaneouslySelectedSourcesAmount}
+				</Text>
+				<Text style={styles.textStyling}>
+					{`${currentlySelected} ${chosenSrcList.length}`}
+				</Text>
+			</View>
 		</ScrollView>
 	)
 }
@@ -79,7 +102,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20
 	},
 	header: {
-		alignSelf: 'flex-start'
+		alignSelf: 'flex-start',
+		fontSize: 20,
 	},
 	list: {
 		flexDirection: 'row',
@@ -97,5 +121,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexWrap: "wrap",
 		textAlign: "center"
+	},
+	bottomNotes: {
+		marginTop: 10
+	},
+	textStyling: {
+		fontSize: 18
 	}
 });

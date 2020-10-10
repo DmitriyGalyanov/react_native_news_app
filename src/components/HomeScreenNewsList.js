@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import {selectSearchParametersData} from 'state_slices/searchParametersSlice';
 
 import NewsPiece from 'components/NewsPiece';
+import CenteredAlert from 'components/CenteredAlert';
 
 export default function HomeScreenNewsList() {
 	const parentTabName = 'HomeScreen';
@@ -99,14 +100,14 @@ export default function HomeScreenNewsList() {
 		)
 	};
 
-	if (list.length === 0) {
+	if (list?.length === 0 || list === undefined) {
 		return (
-			<Text>No results</Text>
+			<CenteredAlert alertText='No results. Try to provide more parameters'/>
 		)
 	};
 	if (isError) {
 		return (
-			<Text>Something went wrong... refresh please</Text>
+			<CenteredAlert alertText='Something went wrong... refresh please'/>
 		)
 	};
 

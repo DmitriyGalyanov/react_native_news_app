@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20
 	},
 	header: {
-		alignSelf: 'flex-start'
+		alignSelf: 'flex-start',
+		fontSize: 17
 	},
 	list: {
 		flexDirection: 'row',
@@ -90,5 +91,6 @@ const styles = StyleSheet.create({
 	disabledNote: {
 		flex: 1,
 		flexWrap: "wrap",
+		fontSize: 15
 	}
 });
