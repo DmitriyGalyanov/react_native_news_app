@@ -26,19 +26,23 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import RootDrawerNav from 'navs/RootDrawerNav';
 
+import {LocalizationProvider} from 'localization/LocalizationContext';
+
 
 const App: () => React$Node = () => {
 	Reactotron.log('hello rendering world'); //e.g
 
 	return (
 		<Provider store={store}>
-			<PersistGate loading={<CenteredAlert target='App State'/>}
-				persistor={persistor}
-			>
-				<NavigationContainer>
-					<RootDrawerNav />
-				</NavigationContainer>
-			</PersistGate>
+			<LocalizationProvider>
+				<PersistGate loading={<CenteredAlert target='App State'/>}
+					persistor={persistor}
+				>
+					<NavigationContainer>
+						<RootDrawerNav />
+					</NavigationContainer>
+				</PersistGate>
+			</LocalizationProvider>
 		</Provider>
 	);
 };
