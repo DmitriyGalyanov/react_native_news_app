@@ -15,7 +15,7 @@ const persistConfig = {
 	key: 'root',
 	storage: storage,
 	// whiteList: [],
-	blacklist: ['themeSlice'] //COMMENT AFTER SETUP
+	// blacklist: ['themeSlice'] //COMMENT AFTER SETUP
 }
 
 const rootReducer = combineReducers({

@@ -4,9 +4,7 @@ import DrawerCallButton from 'components/DrawerCallButton';
 
 import {HeaderBackButton} from '@react-navigation/stack';
 
-import themeColors from 'theme/colors';
-
-const headerLeft = (props) => {
+export const headerLeft = (props) => {
 	const {canGoBack} = props;
 
 	if (!canGoBack) return <DrawerCallButton {...props}/>
@@ -15,9 +13,5 @@ const headerLeft = (props) => {
 
 
 export default {
-	headerStyle: {
-		backgroundColor: themeColors.main
-	},
-	headerTintColor: themeColors.accent,
 	headerLeft: props => headerLeft(props)
 }

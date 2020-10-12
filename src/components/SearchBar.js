@@ -16,8 +16,6 @@ import animations,
 	{changeValueAnim,
 	fadeInAnim, fadeOutAnim} from 'theme/animations';
 
-// import themeColors from 'theme/colors';
-
 import {ThemeContext} from 'theme/ThemeContext';
 import {LocalizationContext} from 'localization/LocalizationContext';
 
@@ -31,7 +29,6 @@ export default function SearchBar() {
 
 	const themeName = useSelector(selectThemeData).entries.value;
 	const themeColors = useContext(ThemeContext).colors[themeName];
-	console.log(themeColors, 'log')
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
@@ -89,7 +86,7 @@ export default function SearchBar() {
 					style={[
 						styles.searchBarInput,
 						{
-							backgroundColor: themeColors.accent,
+							backgroundColor: 'white',
 							width: searchBarWidth,
 							opacity: searchBarOpacity
 						}
@@ -106,7 +103,7 @@ export default function SearchBar() {
 						{
 							color: magnifierColor.interpolate({
 								inputRange: [0, animTime],
-								outputRange: [themeColors.accent, themeColors.secondary]
+								outputRange: [themeColors.accent, themeColors.main]
 							})
 						}
 					]}

@@ -18,8 +18,6 @@ export default function DrawerCallButton(props) {
 	const themeName = useSelector(selectThemeData).entries.value;
 	const themeColors = useContext(ThemeContext).colors[themeName];
 
-	// better to take color from props?
-
 	const navigation = useNavigation();
 
 	return (

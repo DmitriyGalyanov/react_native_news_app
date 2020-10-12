@@ -1,27 +1,24 @@
 import React, {useContext} from 'react';
 
-import {StyleSheet,
-	TouchableNativeFeedback
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 
 import {Divider} from 'react-native-paper';
 
 import {DrawerContentScrollView,
-	DrawerItemList
-} from '@react-navigation/drawer';
+	DrawerItemList} from '@react-navigation/drawer';
 
 import ParametersButtonsGroup from 'components/ParametersButtonsGroup';
+import ThemeButtonsGroup from 'components/ThemeButtonsGroup';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {selectLanguageData} from 'state_slices/languageSlice';
-import {setLanguage} from 'state_slices/languageSlice';
+import {selectLanguageData,
+	setLanguage} from 'state_slices/languageSlice';
 
 import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 export default function MainDrawerContent(props) {
 	const dispatch = useDispatch();
-	// const ripple = TouchableNativeFeedback.Ripple('#adacac', false);
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
@@ -57,6 +54,9 @@ export default function MainDrawerContent(props) {
 				parameterValue={interfaceLanguage}
 				buttonsData={interfaceLanguageButtons}
 				onPress={value => dispatch(setLanguage(value))}
+			/>
+			<ThemeButtonsGroup
+				groupWrapStyles={{paddingHorizontal: 10}}
 			/>
 		</DrawerContentScrollView>
 	);

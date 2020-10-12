@@ -5,19 +5,25 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import MainRouteBottomNavTab from 'navs/MainRouteBottomNavTab';
 import ParametersRouteBottomNavTab from 'navs/ParametersRouteBottomNavTab';
 
-import MainDrawerContent from 'components/MainDrawerContent';
+import MainDrawerContent from 'components/MainDrawerContent'; //rename
 
 import {useSelector} from 'react-redux';
+
+import {selectThemeData} from 'state_slices/themeSlice';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
-import mainDrawerContentOptions from 'theme/mainDrawerContentOptions';
+import rootDrawerContentOptions from 'theme/rootDrawerContentOptions';
 
+import {ThemeContext} from 'theme/ThemeContext';
 import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 const Drawer = createDrawerNavigator();
 
 export default function RootDrawerNav() {
+	const themeName = useSelector(selectThemeData).entries.value;
+	const themeColors = useContext(ThemeContext).colors[themeName];
+
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
 	const localization = useContext(LocalizationContext)[interfaceLanguage]
@@ -28,7 +34,10 @@ export default function RootDrawerNav() {
 
 	return (
 		<Drawer.Navigator initialRouteName="MainScreen"
-			drawerContentOptions={mainDrawerContentOptions}
+			drawerContentOptions={{
+				rootDrawerContentOptions,
+				activeTintColor: themeColors.secondary
+			}}
 			drawerContent={(props) => <MainDrawerContent {...props} />}
 		>
 			<Drawer.Screen name="MainScreen"

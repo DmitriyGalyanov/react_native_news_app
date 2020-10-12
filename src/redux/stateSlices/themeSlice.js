@@ -4,7 +4,18 @@ export const themeSlice = createSlice({
 	name: 'themeData',
 	initialState: {
 		entries: {
-			value: 'mint'
+			value: 'cyan-blue',
+
+			themesList: {
+				'cyan-blue': {
+					title: 'cyan-blue',
+					buttonColor: '#2196F3'
+				},
+				'mint': {
+					title: 'mint',
+					buttonColor: '#aaf0d1'
+				}
+			}
 		},
 	},
 
