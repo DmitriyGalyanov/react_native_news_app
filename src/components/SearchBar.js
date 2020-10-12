@@ -1,13 +1,13 @@
 import React, {useRef, useState, useContext} from 'react';
 
 import {View, TextInput,
-	Animated, StyleSheet
-} from 'react-native';
+	Animated, StyleSheet} from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {editSearchQuery,
 	selectSearchParametersData} from 'state_slices/searchParametersSlice';
 
+import {selectThemeData} from 'state_slices/themeSlice';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,8 +16,9 @@ import animations,
 	{changeValueAnim,
 	fadeInAnim, fadeOutAnim} from 'theme/animations';
 
-import themeColors from 'theme/colors';
+// import themeColors from 'theme/colors';
 
+import {ThemeContext} from 'theme/ThemeContext';
 import {LocalizationContext} from 'localization/LocalizationContext';
 
 
@@ -27,6 +28,10 @@ const AnimatedIcon = Animated.createAnimatedComponent(MaterialCommunityIcons);
 
 export default function SearchBar() {
 	const dispatch = useDispatch();
+
+	const themeName = useSelector(selectThemeData).entries.value;
+	const themeColors = useContext(ThemeContext).colors[themeName];
+	console.log(themeColors, 'log')
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
@@ -84,6 +89,7 @@ export default function SearchBar() {
 					style={[
 						styles.searchBarInput,
 						{
+							backgroundColor: themeColors.accent,
 							width: searchBarWidth,
 							opacity: searchBarOpacity
 						}
@@ -121,7 +127,6 @@ const styles = StyleSheet.create({
 		top: 3
 	},
 	searchBarInput: {
-		backgroundColor: themeColors.accent,
 		borderRadius: 10,
 		height: 34,
 		paddingTop: 8,

@@ -8,16 +8,20 @@ import SearchParametersScreen from 'screens/SearchParametersScreen';
 import SourcesParametersScreen from 'screens/SourcesParametersScreen';
 
 import {useSelector} from 'react-redux';
+
+import {selectThemeData} from 'state_slices/themeSlice';
 import {selectLanguageData} from 'state_slices/languageSlice';
 
-import themeColors from 'theme/colors';
-
+import {ThemeContext} from 'theme/ThemeContext';
 import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function ParametersRouteBottomNavTab() {
+	const themeName = useSelector(selectThemeData).entries.value;
+	const themeColors = useContext(ThemeContext).colors[themeName];
+
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
 	const localization = useContext(LocalizationContext)[interfaceLanguage]

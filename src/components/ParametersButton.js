@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {View, Button, StyleSheet} from 'react-native';
 
-import themeColors from 'theme/colors';
+import {useSelector} from 'react-redux';
+import {selectThemeData} from 'state_slices/themeSlice';
+
+import {ThemeContext} from 'theme/ThemeContext';
 
 
 export default function ParametersButton(props) {
+	const themeName = useSelector(selectThemeData).entries.value;
+	const themeColors = useContext(ThemeContext).colors[themeName];
 
 	const {title, value,
 		buttonsStyle: buttonStyle,

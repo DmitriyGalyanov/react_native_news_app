@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {StyleSheet,
 	View,
@@ -15,13 +15,19 @@ import {selectBookmarksData,
 
 import { useNavigation } from '@react-navigation/native';
 
-import themeColors from 'theme/colors';
+import {selectThemeData} from 'state_slices/themeSlice';
+
+import {ThemeContext} from 'theme/ThemeContext';
 
 const placeholderImgUrl = 'https://image.shutterstock.com/z/stock-vector-disconnected-cable-text-warning-message-sorry-something-went-wrong-oops-error-page-vector-1298184715.jpg';
 
 
 export default function NewsPiece(props) {
 	const dispatch = useDispatch();
+
+	const themeName = useSelector(selectThemeData).entries.value;
+	const themeColors = useContext(ThemeContext).colors[themeName];
+
 	const navigation = useNavigation();
 	const {parentTabName, parentStackName} = props;
 

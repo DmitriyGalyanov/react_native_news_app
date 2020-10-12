@@ -4,7 +4,7 @@ export const themeSlice = createSlice({
 	name: 'themeData',
 	initialState: {
 		entries: {
-			value: 'blue'
+			value: 'mint'
 		},
 	},
 

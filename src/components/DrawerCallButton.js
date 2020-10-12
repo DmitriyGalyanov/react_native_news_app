@@ -11,17 +11,14 @@ import { useNavigation } from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {selectThemeData} from 'state_slices/themeSlice';
 
-import themeColors from 'theme/colors';
-
 import {ThemeContext} from 'theme/ThemeContext';
 
 
 export default function DrawerCallButton(props) {
 	const themeName = useSelector(selectThemeData).entries.value;
+	const themeColors = useContext(ThemeContext).colors[themeName];
 
-	const theme = useContext(ThemeContext);
-	console.log(theme, 'theme')
-	console.log(themeName, 'themeName')
+	// better to take color from props?
 
 	const navigation = useNavigation();
 

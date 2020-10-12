@@ -1,7 +1,7 @@
-import animations from './animations';
+// import animations from './animations';
 import colors from './colors';
 
 export const theme = {
-	animations: animations,
+	// animations: animations,
 	colors: colors,
 };
