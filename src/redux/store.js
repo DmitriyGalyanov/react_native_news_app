@@ -9,6 +9,7 @@ import Reactotron from '../../ReactotronConfig';
 import bookmarksReducer from './stateSlices/bookmarksSlice';
 import searchParametersReducer from './stateSlices/searchParametersSlice';
 import languageReducer from './stateSlices/languageSlice';
+import themeReducer from './stateSlices/themeSlice';
 
 const persistConfig = {
 	key: 'root',
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
 		bookmarksSlice: bookmarksReducer,
 		searchParametersSlice: searchParametersReducer,
 		languageSlice: languageReducer,
+		themeSlice: themeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

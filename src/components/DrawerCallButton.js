@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {View,
 	TouchableHighlight,
@@ -8,12 +8,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { useNavigation } from '@react-navigation/native';
 
+import {useSelector} from 'react-redux';
+import {selectThemeData} from 'state_slices/themeSlice';
+
 import themeColors from 'theme/colors';
+
+import {ThemeContext} from 'theme/ThemeContext';
 
 
 export default function DrawerCallButton(props) {
+	const themeName = useSelector(selectThemeData).entries.value;
+
+	const theme = useContext(ThemeContext);
+	console.log(theme, 'theme')
+	console.log(themeName, 'themeName')
+
 	const navigation = useNavigation();
-	// const {tintColor} = props;
 
 	return (
 		<View style={styles.wrap}>

@@ -26,6 +26,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import RootDrawerNav from 'navs/RootDrawerNav';
 
+import {ThemeProvider} from 'theme/ThemeContext';
 import {LocalizationProvider} from 'localization/LocalizationContext';
 
 
@@ -34,15 +35,17 @@ export default function App() {
 
 	return (
 		<Provider store={store}>
-			<LocalizationProvider>
-				<PersistGate loading={<CenteredAlert alertText='appstateisloading'/>}
-					persistor={persistor}
-				>
-					<NavigationContainer>
-						<RootDrawerNav />
-					</NavigationContainer>
-				</PersistGate>
-			</LocalizationProvider>
+			<ThemeProvider>
+				<LocalizationProvider>
+					<PersistGate loading={<CenteredAlert alertText='appstateisloading'/>}
+						persistor={persistor}
+					>
+						<NavigationContainer>
+							<RootDrawerNav />
+						</NavigationContainer>
+					</PersistGate>
+				</LocalizationProvider>
+			</ThemeProvider>
 		</Provider>
 	);
 };
