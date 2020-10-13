@@ -62,7 +62,7 @@ export default function HomeScreen() {
 			<HomeScreenStack.Screen name="NewsPieceWebViewScreen"
 				component={NewsPieceWebViewScreen}
 				options={{
-					title: `${newsPieceWebViewScreenTitle}`,
+					title: newsPieceWebViewScreenTitle,
 				}}
 			/>
 		</HomeScreenStack.Navigator>

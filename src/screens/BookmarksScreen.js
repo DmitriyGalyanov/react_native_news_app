@@ -25,9 +25,11 @@ export default function BookmarksScreen() {
 
 	const interfaceLanguage = useSelector(selectLanguageData).entries.value;
 
-	const localization = useContext(LocalizationContext)[interfaceLanguage];
+	const localization = useContext(LocalizationContext)[interfaceLanguage]
+		.screensTitles;
 
-	const {bookmarksScreenTitle} = localization?.screensTitles;
+	const {bookmarksScreenTitle,
+		newsPieceWebViewScreenTitle} = localization;
 
 	return (
 		<BookmarksScreenStack.Navigator initialRouteName="BookmarksMainScreen"
@@ -47,7 +49,7 @@ export default function BookmarksScreen() {
 			/>
 			<BookmarksScreenStack.Screen name="NewsPieceWebViewScreen" component={NewsPieceWebViewScreen}
 				options={{
-					title: 'News Web View (BOOKMARKS)',
+					title: newsPieceWebViewScreenTitle,
 				}}
 			/>
 		</BookmarksScreenStack.Navigator>
