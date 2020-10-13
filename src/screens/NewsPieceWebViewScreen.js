@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Reactotron from 'reactotron-react-native';
-
 import {Linking} from 'react-native';
 
 import {WebView} from 'react-native-webview';
@@ -16,20 +14,15 @@ NewsPieceWebViewScreen.propTypes = {
 		name: PropTypes.string.isRequired,
 		params: PropTypes.shape({
 			uri: PropTypes.string.isRequired,
-			parentStackName: PropTypes.string.isRequired //
 		})
 	}).isRequired,
 };
 export default function NewsPieceWebViewScreen(props) {
-	Reactotron.log(props)
 	const {navigation} = props;
-	Reactotron.log(navigation.canGoBack())
 
-	const {uri,
-		parentStackName
-	} = props?.route?.params;
+	const {uri} = props?.route?.params;
 	if (uri === undefined) {
-		navigation.navigate(parentStackName);
+		navigation.goBack();
 	}
 
 	const handleOpenUrl = async () => {
@@ -42,9 +35,7 @@ export default function NewsPieceWebViewScreen(props) {
 	}
 
 	const handleError = () => {
-		navigation.navigate(parentStackName);
-		// console.log('test')
-		// navigation.goBack();
+		navigation.goBack(null);
 		handleOpenUrl();
 	}
 
@@ -52,7 +43,6 @@ export default function NewsPieceWebViewScreen(props) {
 		<WebView
 			source={{
 			uri: uri
-			// uri: 'https://edition.cnn.com/2020/09/12/politics/mcenany-trump-election-night-results/index.html'
 			}}
 			onError={() => {
 				handleError();

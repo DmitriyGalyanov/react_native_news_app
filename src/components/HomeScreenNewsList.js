@@ -9,8 +9,6 @@ import NewsPiece from 'components/NewsPiece';
 import CenteredAlert from 'components/CenteredAlert';
 
 export default function HomeScreenNewsList() {
-	const parentTabName = 'HomeScreen';
-	const parentStackName = 'HomeMainScreen';
 
 	const apiSrc = 'https://newsapi.org/v2/';
 	const apiKey = '3f1d580b86b6414e8be8098c17351375';
@@ -93,10 +91,7 @@ export default function HomeScreenNewsList() {
 
 	const renderItem = (item) => {
 		return (
-			<NewsPiece {...item}
-				parentTabName={parentTabName}
-				parentStackName={parentStackName}
-			/>
+			<NewsPiece {...item}/>
 		)
 	};
 

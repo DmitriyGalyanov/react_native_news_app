@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 
-import {View, FlatList, Text} from 'react-native';
+import {View, FlatList} from 'react-native';
 
 import NewsPiece from 'components/NewsPiece';
 import CenteredAlert from 'components/CenteredAlert';
@@ -15,8 +15,6 @@ import {LocalizationContext} from 'localization/LocalizationContext';
 
 
 export default function BookmarksList() {
-	const parentTabName = 'BookmarksScreen',
-				parentStackName = 'BookmarksMainScreen';
 
 	const bookmarksData = useSelector(selectBookmarksData);
 	const {entries: list} = bookmarksData;
@@ -25,10 +23,7 @@ export default function BookmarksList() {
 
 	const renderItem = (item) => {
 		return (
-			<NewsPiece {...item}
-				parentTabName={parentTabName}
-				parentStackName={parentStackName}
-			/>
+			<NewsPiece {...item}/>
 		)
 	};
 

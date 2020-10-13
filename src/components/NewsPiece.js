@@ -39,9 +39,6 @@ NewsPiece.propTypes = {
 		publishedAt: PropTypes.string,
 		content: PropTypes.string
 	}).isRequired,
-
-	// parentTabName: PropTypes.string,
-	parentStackName: PropTypes.string,
 };
 export default function NewsPiece(props) {
 	const dispatch = useDispatch();
@@ -50,9 +47,6 @@ export default function NewsPiece(props) {
 	const themeColors = useContext(ThemeContext).colors[themeName];
 
 	const navigation = useNavigation();
-	const {
-		// parentTabName,
-		parentStackName} = props;
 
 	const {
 		url,
@@ -88,8 +82,6 @@ export default function NewsPiece(props) {
 	const openWebView = () => {
 		navigation.navigate('NewsPieceWebViewScreen', {
 			uri: url,
-			// parentTabName: parentTabName,
-			parentStackName: parentStackName
 		});
 	}
 
