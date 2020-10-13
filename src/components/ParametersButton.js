@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import PropTypes from 'prop-types';
 
 import {View, Button, StyleSheet} from 'react-native';
 
@@ -8,6 +9,29 @@ import {selectThemeData} from 'state_slices/themeSlice';
 import {ThemeContext} from 'theme/ThemeContext';
 
 
+ParametersButton.propTypes = {
+	title: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	buttonsStyle: PropTypes.oneOfType([
+		PropTypes.arrayOf(
+			PropTypes.objectOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.number,
+				])
+			)
+		),
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	]),
+	onPress: PropTypes.func.isRequired,
+	disabled: PropTypes.bool,
+	chosen: PropTypes.bool
+};
 export default function ParametersButton(props) {
 	const themeName = useSelector(selectThemeData).entries.value;
 	const themeColors = useContext(ThemeContext).colors[themeName];

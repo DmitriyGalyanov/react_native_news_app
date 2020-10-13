@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {View, TouchableHighlight,
 	StyleSheet} from 'react-native';
@@ -7,7 +8,24 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {selectThemeData, setTheme} from 'state_slices/themeSlice';
 
-
+ThemeButtonsGroup.propTypes = {
+	wrapStyle: PropTypes.oneOfType([
+		PropTypes.arrayOf(
+			PropTypes.objectOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.number,
+				])
+			)
+		),
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	])
+};
 export default function ThemeButtonsGroup(props) {
 	const dispatch = useDispatch();
 

@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import PropTypes from 'prop-types';
 
 import {View, Text,
 	StyleSheet} from 'react-native';
@@ -12,6 +13,54 @@ import ParametersButton from 'components/ParametersButton';
 import {LocalizationContext} from 'localization/LocalizationContext';
 
 
+EndpointButtonsGroup.propTypes = {
+	wrapStyle: PropTypes.oneOfType([
+		PropTypes.arrayOf(
+			PropTypes.objectOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.number,
+				])
+			)
+		),
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	]),
+	buttonsStyle: PropTypes.oneOfType([
+		PropTypes.arrayOf(
+			PropTypes.objectOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.number,
+				])
+			)
+		),
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	]),
+	header: PropTypes.string.isRequired,
+	parameterValue: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number
+	]).isRequired,
+	buttonsData: PropTypes.arrayOf(
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	).isRequired,
+	onPress: PropTypes.func
+}
 export default function EndpointButtonsGroup(props) {
 	const searchQuery = useSelector(selectSearchParametersData)
 		.entries?.searchQuery;

@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import PropTypes from 'prop-types';
 
 import {StyleSheet,
 	View,
@@ -22,6 +23,26 @@ import {ThemeContext} from 'theme/ThemeContext';
 const placeholderImgUrl = 'https://image.shutterstock.com/z/stock-vector-disconnected-cable-text-warning-message-sorry-something-went-wrong-oops-error-page-vector-1298184715.jpg';
 
 
+NewsPiece.propTypes = {
+	index: PropTypes.number.isRequired,
+
+	item: PropTypes.shape({
+		source: PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string
+		}),
+		author: PropTypes.string,
+		title: PropTypes.string,
+		description: PropTypes.string,
+		url: PropTypes.string,
+		urlToImage: PropTypes.string,
+		publishedAt: PropTypes.string,
+		content: PropTypes.string
+	}).isRequired,
+
+	// parentTabName: PropTypes.string,
+	parentStackName: PropTypes.string,
+};
 export default function NewsPiece(props) {
 	const dispatch = useDispatch();
 
@@ -29,7 +50,9 @@ export default function NewsPiece(props) {
 	const themeColors = useContext(ThemeContext).colors[themeName];
 
 	const navigation = useNavigation();
-	const {parentTabName, parentStackName} = props;
+	const {
+		// parentTabName,
+		parentStackName} = props;
 
 	const {
 		url,
@@ -65,7 +88,7 @@ export default function NewsPiece(props) {
 	const openWebView = () => {
 		navigation.navigate('NewsPieceWebViewScreen', {
 			uri: url,
-			parentTabName: parentTabName,
+			// parentTabName: parentTabName,
 			parentStackName: parentStackName
 		});
 	}

@@ -116,7 +116,7 @@ export default function HomeScreenNewsList() {
 			<FlatList
 				data={list}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.url}
+				keyExtractor={(_, index) => index.toString()}
 				refreshing={isUpdating}
 				onRefresh={onRefresh}
 				onEndReached={onScrollToEnd}

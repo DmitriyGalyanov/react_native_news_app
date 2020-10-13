@@ -1,9 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {View, Text,
 	StyleSheet, Dimensions} from 'react-native';
 
 
+CenteredAlert.propTypes = {
+	alertText: PropTypes.string.isRequired
+};
 export default function CenteredAlert(props) {
 	const {alertText} = props;
 	return (

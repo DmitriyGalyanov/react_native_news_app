@@ -1,17 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import {Linking} from 'react-native'
+import Reactotron from 'reactotron-react-native';
 
-import {useNavigation} from '@react-navigation/native';
-
+import {Linking} from 'react-native';
 
 import {WebView} from 'react-native-webview';
 
+
+NewsPieceWebViewScreen.propTypes = {
+	navigation: PropTypes.object.isRequired,
+
+	route: PropTypes.shape({
+		key: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		params: PropTypes.shape({
+			uri: PropTypes.string.isRequired,
+			parentStackName: PropTypes.string.isRequired //
+		})
+	}).isRequired,
+};
 export default function NewsPieceWebViewScreen(props) {
-	const navigation = useNavigation();
+	Reactotron.log(props)
+	const {navigation} = props;
+	Reactotron.log(navigation.canGoBack())
 
 	const {uri,
-		parentTabName,
 		parentStackName
 	} = props?.route?.params;
 	if (uri === undefined) {
@@ -28,7 +42,9 @@ export default function NewsPieceWebViewScreen(props) {
 	}
 
 	const handleError = () => {
-		navigation.navigate(parentStackName); //navigation.goBack() and navigation.pop() throw errors
+		navigation.navigate(parentStackName);
+		// console.log('test')
+		// navigation.goBack();
 		handleOpenUrl();
 	}
 
@@ -36,9 +52,10 @@ export default function NewsPieceWebViewScreen(props) {
 		<WebView
 			source={{
 			uri: uri
+			// uri: 'https://edition.cnn.com/2020/09/12/politics/mcenany-trump-election-night-results/index.html'
 			}}
 			onError={() => {
-					handleError();
+				handleError();
 			}}
 		/>
 	)

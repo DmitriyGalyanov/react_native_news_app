@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {View, Text,
 	StyleSheet} from 'react-native';
@@ -6,8 +7,58 @@ import {View, Text,
 import ParametersButton from 'components/ParametersButton';
 
 
+ParametersButtonsGroup.propTypes = {
+	row: PropTypes.bool,
+	wrapStyle: PropTypes.oneOfType([
+		PropTypes.arrayOf(
+			PropTypes.objectOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.number,
+				])
+			)
+		),
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	]),
+	buttonsStyle: PropTypes.oneOfType([
+		PropTypes.arrayOf(
+			PropTypes.objectOf(
+				PropTypes.oneOfType([
+					PropTypes.string,
+					PropTypes.number,
+				])
+			)
+		),
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	]),
+	header: PropTypes.string.isRequired,
+	parameterValue: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number
+	]).isRequired,
+	buttonsData: PropTypes.arrayOf(
+		PropTypes.objectOf(
+			PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.number,
+			])
+		)
+	).isRequired,
+	onPress: PropTypes.func.isRequired,
+	disabled: PropTypes.bool,
+	disabledNote: PropTypes.string
+};
 export default function ParametersButtonsGroup(props) {
-
 	const {row, wrapStyle,
 		buttonsStyle,
 		header,
